@@ -60,7 +60,7 @@
 
       <div class="row mt-3">
         <div class="col-lg-12">
-          <table class="table table-striped" id="users-in">
+          <table class="table table-sm" id="users-in">
             <thead>
               <tr>
                 <th scope="col">6:00</th>
@@ -121,11 +121,6 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      // Queried data for the current day
-      // usersin = [
-      //   ['Luisa Morales', '9:14', '12:00'],
-      //   ['Jorge Huerta', '6:30', '10:30', '11:30', '13:00']
-      //   ];
       positions = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 2, 9: 3, 10: 4, 11: 5, 12: 6, 13: 7, 14: 8, 15: 9, 16: 10, 17: 11, 18: 12, 19: 12, 20: 12, 21: 12, 22: 12, 23: 12, 24: 12};
       var d = new Date();
       var n = d.getHours();
@@ -142,6 +137,7 @@
 
             for(var j = 1; j < (usersin[i].length); j++){
               // start position of the current entry
+              console.log(usersin[i][j]);
               displacement = positions[parseInt(usersin[i][j].substr(0,2)) - 6];
               // end position of the current entry
               odd = false;
@@ -149,7 +145,7 @@
                 odd = true;
                 nextDisplacement = positions[n];
               }else{
-                nextDisplacement = positions[parseInt(usersin[i][j+1].substr(0,2)) - 7];
+                nextDisplacement = positions[parseInt(usersin[i][j+1].substr(0,2)) - 6];
               }
               td = '';
               
