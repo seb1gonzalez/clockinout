@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class employeeController extends Controller
 {
+    public function employeesOut()
+    {   
+        $employees = employee::where('inorout', '=', 0)->pluck('name');
+        return $employees;
+    }
+
     public function showAllEmployees()
     {   
         return response()->json(employee::all());

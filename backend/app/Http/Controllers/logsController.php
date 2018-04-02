@@ -18,40 +18,12 @@ class logsController extends Controller
             $responseItem = [];
             array_push($responseItem, $userin);
             foreach($logs AS $log){
-                $temp_log = str_replace(date('Y-m-d'), '', $log);
+                $temp_log = str_replace(date('Y-m-d') . " ", '', $log);
                 array_push($responseItem, $temp_log);
             }
             array_push($response, $responseItem);
         }
-
-        echo json_encode($response);
-
-        // $employee = DB::table('employees')->where('pin', $pin)->first();
-
-        // if($employee == NULL){
-        //     return response()->json('Wrong PIN', 200);
-        // }
-
-        // if($employee->inorout){
-        //     // log user out
-        //     DB::table('employees')
-        //     ->where('pin', $pin)
-        //     ->update(['inorout' => 0]);
-        //     // create log
-        //     DB::table('logs')->insert(      
-        //         ['eId' => $employee->id, 'inorout' => 0]
-        //     );
-        // }else{
-        //     // log user in
-        //     DB::table('employees')
-        //     ->where('pin', $pin)
-        //     ->update(['inorout' => 1]);
-        //     // create log
-        //     DB::table('logs')->insert(
-        //         ['eId' => $employee->id, 'inorout' => 1]
-        //     );
-        // }
-        
+        return response()->json($response);        
     }
 
     public function clockinorout($pin)

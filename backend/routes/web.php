@@ -23,6 +23,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('employees',  ['uses' => 'employeeController@showAllEmployees']);
 
+    $router->get('employeesOut',  ['uses' => 'employeeController@employeesOut']);
+
     $router->post('employees',  ['uses' => 'employeeController@addEmployee']);
 
     $router->put('updateEmployee/{id}',  ['uses' => 'employeeController@updateEmployee']);

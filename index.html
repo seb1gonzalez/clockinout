@@ -81,6 +81,14 @@
             <tbody>
             </tbody>
           </table>
+
+          <hr>
+          <h3>Users Out</h3>
+          <!-- Users Out -->
+          <div class="col-lg-4">
+            <div id="users-out"></div>
+          </div>
+
         </div>  
       </div>
 
@@ -114,10 +122,10 @@
 
     <script>
       // Queried data for the current day
-      usersin = [
-        ['Luisa Morales', '9:14', '12:00'],
-        ['Jorge Huerta', '6:30', '10:30', '11:30', '13:00']
-        ];
+      // usersin = [
+      //   ['Luisa Morales', '9:14', '12:00'],
+      //   ['Jorge Huerta', '6:30', '10:30', '11:30', '13:00']
+      //   ];
       positions = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 2, 9: 3, 10: 4, 11: 5, 12: 6, 13: 7, 14: 8, 15: 9, 16: 10, 17: 11, 18: 12, 19: 12, 20: 12, 21: 12, 22: 12, 23: 12, 24: 12};
       var d = new Date();
       var n = d.getHours();
@@ -125,57 +133,60 @@
       
       $(document).ready(function(){
 
-        for(var i = 0; i < usersin.length; i++){
+        usersin = $.getJSON( "backend/public/api/usersLogs", function(usersin){
 
-          button = '<button class="btn btn-warning btn-block" data-toggle="modal" data-target="#exampleModal">'+ usersin[i][0] +'</button>';
-          row = '<tr>';
-          placed = 0;
-          
-          for(var j = 1; j < (usersin[i].length); j++){
+          for(var i = 0; i < usersin.length; i++){
+            button = '<button class="btn btn-info btn-block" data-toggle="modal" data-target="#exampleModal" disabled>'+ usersin[i][0] +'</button>';
+            row = '<tr>';
+            placed = 0;
 
-            displacement = positions[parseInt(usersin[i][j].substr(0,2))];
-            odd = false;
-            if((j+1) >= usersin[i].length){
-              odd = true;
-              nextDisplacement = positions[n];
-            }else{
-              nextDisplacement = positions[parseInt(usersin[i][j+1].substr(0,2))];
-            }
-            td = '';
-            
-            // if it starts at 6
-            if(displacement == 0){
-              td = '<td colspan="'+ (nextDisplacement + 1) +'">';
-              td = td + button;
-              td = td + '</td>';
-              placed = placed + nextDisplacement + 1;
-              row = row + td;
-              j++;
-            }else if(odd){
-              td = '<td colspan="'+ (displacement - placed) +'"></td>';
-              td = td + '<td colspan="'+ (nextDisplacement - displacement + 1) +'">';
-              td = td + button;
-              td = td + '</td>';
-              placed = placed + nextDisplacement + 1;
-              row = row + td;
-              j++;
-            }else{
-              if((displacement - placed) != 0){
-                td = '<td colspan="'+ (displacement - placed) +'"></td>';
+            for(var j = 1; j < (usersin[i].length); j++){
+              // start position of the current entry
+              displacement = positions[parseInt(usersin[i][j].substr(0,2)) - 6];
+              // end position of the current entry
+              odd = false;
+              if((j+1) >= usersin[i].length){
+                odd = true;
+                nextDisplacement = positions[n];
+              }else{
+                nextDisplacement = positions[parseInt(usersin[i][j+1].substr(0,2)) - 7];
               }
-              td = td + '<td colspan="'+ (nextDisplacement - displacement + 1) +'">';
-              td = td + button;
-              td = td + '</td>';
-              placed = placed + nextDisplacement + 1;
-              row = row + td;
-              j++;
+              td = '';
+              
+              // if it starts at 6
+              if(displacement == 0){
+                td = '<td colspan="'+ (nextDisplacement + 1) +'">';
+                td = td + button;
+                td = td + '</td>';
+                placed = placed + nextDisplacement + 1;
+                row = row + td;
+                j++;
+              }else{
+                if((displacement - placed) != 0){
+                  td = '<td colspan="'+ (displacement - placed) +'"></td>';
+                }
+                td = td + '<td colspan="'+ (nextDisplacement - displacement + 1) +'">';
+                td = td + button;
+                td = td + '</td>';
+                placed = placed + nextDisplacement + 1;
+                row = row + td;
+                j++;
+              }
             }
-          }
-          
-          row = row + '</tr>';
-          $('#users-in tbody').append(row)
 
-        }
+            row = row + '</tr>';
+            $('#users-in tbody').append(row)
+
+            }
+        });
+
+        usersout = $.getJSON( "backend/public/api/employeesOut", function(usersout){
+          for(var i = 0; i < usersout.length; i++){
+            button = '<button class="btn btn-warning btn-block" data-toggle="modal" data-target="#exampleModal" disabled>'+ usersout[i] +'</button>';
+            $('#users-out').append(button)
+          }
+        });
+
       });
     </script>
 
