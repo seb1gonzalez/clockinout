@@ -30,5 +30,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // LOGS
 
     $router->post('clockinorout/{id}',  ['uses' => 'logsController@clockinorout']);
+    
+    $router->get('usersLogs',  ['uses' => 'logsController@usersLogs']);
 
   });
