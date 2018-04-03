@@ -40,15 +40,15 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Employees
+              <a class="nav-link" href="index.html">Employees
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Keypad</a>
+              <a class="nav-link" href="keypad.html">Keypad</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Employee Management</a>
+              <a class="nav-link" href="management.html">Employee Management</a>
             </li>
           </ul>
         </div>
@@ -134,18 +134,19 @@
             button = '<button class="btn btn-info btn-block" data-toggle="modal" data-target="#exampleModal" disabled>'+ usersin[i][0] +'</button>';
             row = '<tr>';
             placed = 0;
+            $timezone_offset = 6;
 
             for(var j = 1; j < (usersin[i].length); j++){
               // start position of the current entry
               console.log(usersin[i][j]);
-              displacement = positions[parseInt(usersin[i][j].substr(0,2)) - 6];
+              displacement = positions[parseInt(usersin[i][j].substr(0,2)) - $timezone_offset];
               // end position of the current entry
               odd = false;
               if((j+1) >= usersin[i].length){
                 odd = true;
                 nextDisplacement = positions[n];
               }else{
-                nextDisplacement = positions[parseInt(usersin[i][j+1].substr(0,2)) - 6];
+                nextDisplacement = positions[parseInt(usersin[i][j+1].substr(0,2)) - $timezone_offset];
               }
               td = '';
               

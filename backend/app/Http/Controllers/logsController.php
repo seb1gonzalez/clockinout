@@ -31,7 +31,7 @@ class logsController extends Controller
         $employee = DB::table('employees')->where('pin', $pin)->first();
 
         if($employee == NULL){
-            return response()->json('Wrong PIN', 200);
+            return response()->json(2, 200);
         }
 
         if($employee->inorout){
@@ -44,7 +44,7 @@ class logsController extends Controller
                 ['eId' => $employee->id, 'inorout' => 0, 'name' => $employee->name]
             );
 
-            return response()->json($employee->name . ' clocked out successfully', 200);
+            return response()->json(0, 200);
             
         }else{
             // log user in
@@ -56,7 +56,7 @@ class logsController extends Controller
                 ['eId' => $employee->id, 'inorout' => 1, 'name' => $employee->name]
             );
 
-            return response()->json($employee->name . ' clocked in successfully', 200);
+            return response()->json(1, 200);
 
         }
         
