@@ -26,7 +26,11 @@
       #pin{
           height: 48px;
       }
+      .btn-keypad {
+          width: 78px !important;
+          }
     </style>
+    <link href="vendor/open-iconic/font/css/open-iconic.css" rel="stylesheet">
 
   </head>
 
@@ -63,44 +67,51 @@
       <div class="row mt-3">
         <div class="col-lg-4 mb-1 offset-lg-4 text-center">
             <h1><div id="pin"></div></h1><hr>
-            <button class="btn btn-primary keypad-number" id="1">
+            <button class="btn btn-primary keypad-number btn-keypad" id="1">
                 <h1>1</h1>
             </button>
-            <button class="btn btn-primary keypad-number" id="2">
+            <button class="btn btn-primary keypad-number btn-keypad" id="2">
                 <h1>2</h1>
             </button>
-            <button class="btn btn-primary keypad-number" id="3">
+            <button class="btn btn-primary keypad-number btn-keypad" id="3">
                 <h1>3</h1>
             </button>
         </div>
         <div class="col-lg-4 mb-1 offset-lg-4 text-center">
-            <button class="btn btn-primary keypad-number" id="4">
+            <button class="btn btn-primary keypad-number btn-keypad" id="4">
                 <h1>4</h1>
             </button>
-            <button class="btn btn-primary keypad-number" id="5">
+            <button class="btn btn-primary keypad-number btn-keypad" id="5">
                 <h1>5</h1>
             </button>
-            <button class="btn btn-primary keypad-number" id="6">
+            <button class="btn btn-primary keypad-number btn-keypad" id="6">
                 <h1>6</h1>
             </button>
         </div>
         <div class="col-lg-4 mb-1 offset-lg-4 text-center">
-            <button class="btn btn-primary keypad-number" id="7">
+            <button class="btn btn-primary keypad-number btn-keypad" id="7">
                 <h1>7</h1>
             </button>
-            <button class="btn btn-primary keypad-number" id="8">
+            <button class="btn btn-primary keypad-number btn-keypad" id="8">
                 <h1>8</h1>
             </button>
-            <button class="btn btn-primary keypad-number" id="9">
+            <button class="btn btn-primary keypad-number btn-keypad" id="9">
                 <h1>9</h1>
             </button>
         </div>
         <div class="col-lg-4 mb-1 offset-lg-4 text-center">
-            <button class="btn btn-warning keypad-delete">
-                <h5>DEL</h5>
+            <button class="btn btn-warning keypad-delete btn-keypad">
+                <h1>
+                    <span class="oi" data-glyph="delete" title="icon name" aria-hidden="true"></span>
+                </h1>
             </button>
-            <button class="btn btn-default keypad-enter" disabled>
-                <h5>ENTER</h5>
+            <button class="btn btn-primary keypad-number btn-keypad" id="0">
+                <h1>0</h1>
+            </button>
+            <button class="btn btn-default keypad-enter btn-keypad" disabled>
+                <h1>
+                    <span class="oi" data-glyph="account-login" title="icon name" aria-hidden="true"></span>
+                </h1>
             </button>
         </div>
       </div>
