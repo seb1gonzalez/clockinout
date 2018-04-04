@@ -23,6 +23,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('employees',  ['uses' => 'employeeController@showAllEmployees']);
 
+    $router->get('employee/{id}',  ['uses' => 'employeeController@employee']);
+
     $router->get('employeesOut',  ['uses' => 'employeeController@employeesOut']);
 
     $router->post('employees',  ['uses' => 'employeeController@addEmployee']);
@@ -34,5 +36,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('clockinorout/{id}',  ['uses' => 'logsController@clockinorout']);
     
     $router->get('usersLogs',  ['uses' => 'logsController@usersLogs']);
+
+    $router->get('userLogs/{id}',  ['uses' => 'logsController@userLogs']);
 
   });

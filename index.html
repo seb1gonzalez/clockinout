@@ -95,22 +95,33 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Student Name</h5>
+          <div class="modal-header text-center">
+            <h5 class="modal-title" id="modalLabel"></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            Clocked-in: 7:00 AM<br>
-            Clocked-out: 8:30 AM
+            <!-- <div>
+              <strong>Classification:</strong> <span id="classification"></span>
+            </div> -->
+            <table class="table table-sm" id="user-logs">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger">Fire</button>
+            <button type="button" class="btn btn-danger">Kick Out</button>
           </div>
         </div>
       </div>
@@ -129,16 +140,14 @@
       $(document).ready(function(){
 
         usersin = $.getJSON( "backend/public/api/usersLogs", function(usersin){
-
           for(var i = 0; i < usersin.length; i++){
-            button = '<button class="btn btn-info btn-block" data-toggle="modal" data-target="#exampleModal" disabled>'+ usersin[i][0] +'</button>';
+            button = '<button class="btn btn-info btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="'+ usersin[i][0] +'">'+ usersin[i][1] +'</button>';
             row = '<tr>';
             placed = 0;
             $timezone_offset = 6;
 
-            for(var j = 1; j < (usersin[i].length); j++){
+            for(var j = 2; j < (usersin[i].length); j++){
               // start position of the current entry
-              console.log(usersin[i][j]);
               displacement = positions[parseInt(usersin[i][j].substr(0,2)) - $timezone_offset];
               // end position of the current entry
               odd = false;
@@ -179,9 +188,37 @@
 
         usersout = $.getJSON( "backend/public/api/employeesOut", function(usersout){
           for(var i = 0; i < usersout.length; i++){
-            button = '<button class="btn btn-warning btn-block" data-toggle="modal" data-target="#exampleModal" disabled>'+ usersout[i] +'</button>';
+            button = '<button class="btn btn-warning btn-block" data-toggle="modal" data-target="#modal" disabled>'+ usersout[i] +'</button>';
             $('#users-out').append(button)
           }
+        });
+        
+        $('table').on('click', '.employee-log' , function(){
+          eId = $(this).attr('data-id');
+          userInfo = $.getJSON( "backend/public/api/employee/"+eId, function(userInfo){
+            $('#modalLabel').html(userInfo.name);
+            // $('#classification').html(userInfo.classification);
+            $('#user-logs tbody tr').remove();
+            userLogs = $.getJSON( "backend/public/api/userLogs/"+eId, function(userLogs){
+              inorout = 1;
+              for(var i = 0; i < userLogs.length; i++){
+                time = userLogs[i];
+                if(inorout){
+                  inoroutMessage = 'In';
+                  inorout = 0;
+                }else{
+                  inoroutMessage = 'Out';
+                  inorout = 1;
+                }
+                tr = '<tr>\
+                      <td>'+ time +'</td>\
+                      <td>'+ inoroutMessage +'</td>\
+                     </tr>';
+                $('#user-logs').append(tr);
+              }
+            });
+            
+          });
         });
 
       });

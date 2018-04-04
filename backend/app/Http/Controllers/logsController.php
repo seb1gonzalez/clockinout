@@ -7,16 +7,31 @@ use App\logs;
 use Illuminate\Http\Request;
 
 class logsController extends Controller
-{
+{   
+    public function userLogs($eId)
+    {   
+        $resposne = [];
+        $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $eId)->pluck('time');
+        $response = [];
+        foreach($logs AS $log){
+            $temp_log = str_replace(date('Y-m-d') . " ", '', $log);
+            array_push($response, $temp_log);
+        }   
+
+        return response()->json($response);        
+    }
+    
     public function usersLogs()
     {
-        $usersin = DB::table('logs')->distinct()->where('time', 'LIKE', "%".date('Y-m-d')."%")->pluck('name');
+        $usersin = DB::table('employees')->select('id', 'name')->get();
+        $usersin =  json_decode(json_encode($usersin), True);
         $response = [];
 
         foreach($usersin AS $userin){
-            $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('name', $userin)->pluck('time');
+            $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->pluck('time');
             $responseItem = [];
-            array_push($responseItem, $userin);
+            array_push($responseItem, $userin['id']);
+            array_push($responseItem, $userin['name']);
             foreach($logs AS $log){
                 $temp_log = str_replace(date('Y-m-d') . " ", '', $log);
                 array_push($responseItem, $temp_log);

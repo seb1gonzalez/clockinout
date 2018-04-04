@@ -18,6 +18,11 @@ class employeeController extends Controller
         return response()->json(employee::all());
     }
 
+    public function employee($id)
+    {   
+        return response()->json(employee::find($id));
+    }
+
     public function addEmployee(Request $request)
     {
         $employee = employee::create($request->all());
