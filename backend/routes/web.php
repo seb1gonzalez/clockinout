@@ -19,6 +19,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     // EMPLOYEES
 
+    $router->get('pinLookUp/{pin}',  ['uses' => 'employeeController@pinLookUp']);
+
     $router->get('inorout/{id}',  ['uses' => 'employeeController@inorout']);
 
     $router->get('employees',  ['uses' => 'employeeController@showAllEmployees']);

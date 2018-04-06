@@ -144,18 +144,25 @@
       }
 
       function addEmployee(name, classification, pin){
-        if(name == "" || pin == ""){
-          modalMessage("<h3>You must fill all fields!</h3>");
-        }else if(pin.length != 4){
-          modalMessage("<h3>PIN lenght must be four characters</h3>");
-        }else{
-          data = {name: name, classification: classification, pin: pin, inorout: 0};
-          employee = $.post('backend/public/api/employees', data, function(employee){
-            $('#modal_message_area').html('Employee ' + employee.name + ' has been successfully added!');
-            loadEmployees();
-            clearInputFields();
-          });
-        }
+
+        $.get( "backend/public/api/pinLookUp/"+pin, function(response){
+          if(response.pin == pin){
+            modalMessage("<h3>This pin is already in use, try a different one.</h3>");
+          }else{
+            if(name == "" || pin == ""){
+              modalMessage("<h3>You must fill all fields!</h3>");
+            }else if(pin.length != 4){
+              modalMessage("<h3>PIN lenght must be four characters</h3>");
+            }else{
+              data = {name: name, classification: classification, pin: pin, inorout: 0};
+              employee = $.post('backend/public/api/employees', data, function(employee){
+                modalMessage('Employee ' + employee.name + ' has been successfully added!');
+                loadEmployees();
+                clearInputFields();
+              });
+            }
+          }
+        });
       }
 
       function modalMessage(message){

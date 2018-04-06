@@ -23,6 +23,13 @@ class employeeController extends Controller
         return response()->json(employee::find($id));
     }
 
+    public function pinLookUp($pin)
+    {   
+        $employee = employee::where('pin', $pin)->first();
+        return response()->json($employee);
+    }
+
+
     public function addEmployee(Request $request)
     {
         $employee = employee::create($request->all());
