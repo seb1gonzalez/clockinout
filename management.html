@@ -144,7 +144,6 @@
       }
 
       function addEmployee(name, classification, pin){
-
         $.get( "backend/public/api/pinLookUp/"+pin, function(response){
           if(response.pin == pin){
             modalMessage("<h3>This pin is already in use, try a different one.</h3>");

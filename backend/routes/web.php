@@ -41,4 +41,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('userLogs/{id}',  ['uses' => 'logsController@userLogs']);
 
+    $router->get('weeklyLog/{eId}',  ['uses' => 'logsController@weeklyLog']);
+
   });

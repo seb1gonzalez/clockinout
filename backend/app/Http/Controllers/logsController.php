@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 
 class logsController extends Controller
 {   
+    public function weeklyLog($eId)
+    {   
+        $weekStart = json_decode(json_encode(new \DateTime("last monday")), True);
+        $date = $weekStart['date'];
+        $logs = DB::table('logs')->where('time', '>', $date)->where('eId', $eId)->orderBy('time', 'asc')->pluck('time');
+        return response()->json($logs);                
+    }
+
     public function userLogs($eId)
     {   
         $resposne = [];
-        $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $eId)->pluck('time');
+        $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $eId)->orderBy('time', 'asc')->pluck('time');
         $response = [];
         foreach($logs AS $log){
             $temp_log = str_replace(date('Y-m-d') . " ", '', $log);
@@ -28,7 +36,7 @@ class logsController extends Controller
         $response = [];
 
         foreach($usersin AS $userin){
-            $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->pluck('time');
+            $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc')->pluck('time');
             $responseItem = [];
             array_push($responseItem, $userin['id']);
             array_push($responseItem, $userin['name']);

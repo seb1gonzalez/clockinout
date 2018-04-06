@@ -108,6 +108,7 @@
             <!-- <div>
               <strong>Classification:</strong> <span id="classification"></span>
             </div> -->
+            <canvas id="myChart" width="400" height="200"></canvas>
             <table class="table table-sm" id="user-logs">
               <thead>
                 <tr>
@@ -129,11 +130,14 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 
     <script>
       positions = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 2, 9: 3, 10: 4, 11: 5, 12: 6, 13: 7, 14: 8, 15: 9, 16: 10, 17: 11, 18: 12, 19: 12, 20: 12, 21: 12, 22: 12, 23: 12, 24: 12};
       var d = new Date();
       var n = d.getHours();
+  
+      var ctx = document.getElementById("myChart").getContext('2d');
       
       $(document).ready(function(){
 
@@ -192,7 +196,43 @@
         });
         
         $('table').on('click', '.employee-log' , function(){
+
           eId = $(this).attr('data-id');
+          
+          $.get( "backend/public/api/weeklyLog/"+eId, function(response){
+            totalHours = 0;
+            for(var j = 1; j < response.length; j++){
+              currDate = new Date(response[j]);
+              prevDate = new Date(response[j - 1]);
+              hours = ((currDate - prevDate) / 1000) / 3600;
+              totalHours += hours;
+            }
+
+            var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ["Weekly Hours"],
+                datasets: [{
+                  label: '# of hours',
+                  data: [totalHours.toFixed(2)],
+                  backgroundColor: 'rgb(102, 172, 226)'
+                  }]
+                },
+                options: {
+                  legend: {
+                    display: false
+                  },
+                  scales: {
+                    yAxes: [{
+                      ticks: {
+                        beginAtZero:true
+                      }
+                    }]
+                  }
+                }
+              });
+            });
+
           userInfo = $.getJSON( "backend/public/api/employee/"+eId, function(userInfo){
             $('#modalLabel').html(userInfo.name);
             // $('#classification').html(userInfo.classification);
