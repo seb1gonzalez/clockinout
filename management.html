@@ -61,10 +61,61 @@
     <div class="container">
 
       <div class="row mt-3">
-        <div class="col-lg-12">
+        <div class="col-lg-4">
+          
+          <h3>Add Employee</h3><hr>
+
+          <label>Name:</label>
+          <input type="text" class="form-control" id="employee_name">
+
+          <label>Classification:</label>
+          <select class="form-control" id="employee_classification">
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Staff">Staff</option>
+            <option value="Faculty">Faculty</option>
+          </select>
+
+          <label>PIN:</label>
+          <input type="text" class="form-control" maxlength="4" id="employee_pin">
+
+          <button class="btn btn-success btn-block mt-3" id="add_employee" data-toggle="modal" data-target="#modal">
+            Submit
+          </button>
+
+        </div>
+
+        <div class="col-lg-8">
+          
+            <h3>Employees</h3>  
+            <table class="table table-sm" id="employees">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Classification</th>
+                  <th>PIN</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+  
+          </div>
+      </div>
+      
+      <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center" id="modal_message_area">
             
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
+    </div>
 
     </div>
 
@@ -85,6 +136,49 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      function clearInputFields(){
+        $('#employee_name').val('');
+        $('#employee_pin').val('');
+      }
+
+      function addEmployee(name, classification, pin){
+        if(name == "" || pin == ""){
+          modalMessage("<h3>You must fill all fields!</h3>");
+        }else if(pin.length != 4){
+          modalMessage("<h3>PIN lenght must be four characters</h3>");
+        }else{
+          data = {name: name, classification: classification, pin: pin, inorout: 0};
+          employee = $.post('backend/public/api/employees', data, function(employee){
+            $('#modal_message_area').html('Employee ' + employee.name + ' has been successfully added!');
+            loadEmployees();
+            clearInputFields();
+          });
+        }
+      }
+
+      function modalMessage(message){
+        $('#modal_message_area').html(message);
+      }
+
+      function loadEmployees(){
+        $('#employees tbody tr').remove();
+        employees = $.get('backend/public/api/employees', function(employees){
+          for(var i = 0; i < employees.length; i++){
+            tr = '<tr><td>'+ employees[i].name +'</td><td>'+ employees[i].classification +'</td><td>'+ employees[i].pin +'</td></tr>';
+            $('#employees').append(tr);
+          }
+        });
+      }
+
+      $(document).ready(function(){
+        $('#add_employee').click(function(){
+          addEmployee($('#employee_name').val(), $('#employee_classification').val(), $('#employee_pin').val());
+        });
+        loadEmployees();
+      });
+    </script>
 
   </body>
 </html>
