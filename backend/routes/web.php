@@ -28,6 +28,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('employee/{id}',  ['uses' => 'employeeController@employee']);
 
     $router->get('employeesOut',  ['uses' => 'employeeController@employeesOut']);
+    
+    $router->get('employeesIn',  ['uses' => 'employeeController@employeesIn']);
 
     $router->post('employees',  ['uses' => 'employeeController@addEmployee']);
 

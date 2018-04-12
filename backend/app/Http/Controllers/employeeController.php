@@ -6,7 +6,13 @@ use App\employee;
 use Illuminate\Http\Request;
 
 class employeeController extends Controller
-{
+{   
+    public function employeesIn()
+    {   
+        $employees = employee::where('inorout', '=', 1)->pluck('name');
+        return $employees;
+    }
+
     public function employeesOut()
     {   
         $employees = employee::where('inorout', '=', 0)->pluck('name');
