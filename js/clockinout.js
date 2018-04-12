@@ -32,6 +32,7 @@ function loadBarChart(eId) {
             prevDate = new Date(response[j - 1]);
             hours = ((currDate - prevDate) / 1000) / 3600;
             totalHours += hours;
+            j++;
         }
 
         var myChart = new Chart(ctx, {

@@ -64,7 +64,7 @@ class logsController extends Controller
             ->update(['inorout' => 0]);
             // create log
             DB::table('logs')->insert(      
-                ['eId' => $employee->id, 'inorout' => 0, 'name' => $employee->name]
+                ['eId' => $employee->id, 'inorout' => 0, 'name' => $employee->name, 'flag' => 0]
             );
 
             return response()->json(0, 200);
@@ -76,7 +76,7 @@ class logsController extends Controller
             ->update(['inorout' => 1]);
             // create log
             DB::table('logs')->insert(
-                ['eId' => $employee->id, 'inorout' => 1, 'name' => $employee->name]
+                ['eId' => $employee->id, 'inorout' => 1, 'name' => $employee->name, 'flag' => 0]
             );
 
             return response()->json(1, 200);
