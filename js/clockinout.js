@@ -79,10 +79,10 @@ function timeTable(){
                 if ((j + 1) >= usersin[i].length) {
                     odd = true;
                     nextDisplacement = positions[n];
-                    button = '<button class="btn btn-info btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][j] + '</button>';
+                    button = '<button class="btn btn-info btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + (usersin[i][j]).substring(0, 5); + '</button>';
                 } else {
                     nextDisplacement = positions[parseInt(usersin[i][j + 1].substr(0, 2)) - $timezone_offset];
-                    button = '<button class="btn btn-warning btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][j] + ' - '+ usersin[i][j+1] +'</button>';
+                    button = '<button class="btn btn-warning btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + (usersin[i][j]).substring(0, 5); + ' - '+ usersin[i][j+1] +'</button>';
                 }
                 td = '';
 
