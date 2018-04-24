@@ -64,8 +64,9 @@ function loadBarChart(eId) {
 function timeTable(){
     $('#users-in tbody tr').remove();
     $.getJSON("backend/public/api/usersLogs", function (usersin) {
+        console.log(usersin);
         for (var i = 0; i < usersin.length; i++) {
-            button = '<button class="btn btn-info btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + '</button>';
+            button = '';
             row = '<tr>';
             placed = 0;
             $timezone_offset = 0;
@@ -78,8 +79,10 @@ function timeTable(){
                 if ((j + 1) >= usersin[i].length) {
                     odd = true;
                     nextDisplacement = positions[n];
+                    button = '<button class="btn btn-info btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][j] + '</button>';
                 } else {
                     nextDisplacement = positions[parseInt(usersin[i][j + 1].substr(0, 2)) - $timezone_offset];
+                    button = '<button class="btn btn-warning btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][j] + ' - '+ usersin[i][j+1] +'</button>';
                 }
                 td = '';
 
@@ -93,7 +96,7 @@ function timeTable(){
                     j++;
                 } else {
                     if ((displacement - placed) != 0) {
-                        td = '<td colspan="' + (displacement - placed) + '"></td>';
+                        td = '<td colspan="' + (displacement - placed) + '"><button class="btn btn-default btn-block" disabled>-</button></td>';
                     }
                     td = td + '<td colspan="' + (nextDisplacement - displacement + 1) + '">';
                     td = td + button;
@@ -102,6 +105,9 @@ function timeTable(){
                     row = row + td;
                     j++;
                 }
+
+                namerow = '<tr><td><button class="btn btn-info btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + '</button></td></tr>';
+                $('#users-names tbody').append(namerow);
             }
 
             row = row + '</tr>';
@@ -114,14 +120,16 @@ function loadUsers() {
     $('#users-out-list').html('');
     $('#users-in-list').html('');
     $.getJSON("backend/public/api/employeesOut", function (usersout) {
+        $('#users-out-count').html(usersout.length);
         for (var i = 0; i < usersout.length; i++) {
-            button = '<button class="btn btn-warning btn-block" data-toggle="modal" data-target="#modal" disabled>' + usersout[i] + '</button>';
+            button = '<button class="btn btn-warning btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersout[i]['id'] + '">' + usersout[i]['name'] + '</button>';
             $('#users-out-list').append(button)
         }
     });
     $.getJSON("backend/public/api/employeesIn", function (usersin) {
+        $('#users-in-count').html(usersin.length);
         for (var i = 0; i < usersin.length; i++) {
-            button = '<button class="btn btn-success btn-block" data-toggle="modal" data-target="#modal" disabled>' + usersin[i] + '</button>';
+            button = '<button class="btn btn-success btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i]['id'] + '">' + usersin[i]['name'] + '</button>';
             $('#users-in-list').append(button);
         }
     });

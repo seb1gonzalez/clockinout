@@ -46,10 +46,13 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="list.html">List</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="keypad.html">Keypad</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="management.html">Employee Management</a>
+            <a class="nav-link" href="management.html">Management</a>
           </li>
         </ul>
       </div>
@@ -60,7 +63,18 @@
   <div class="container">
 
     <div class="row mt-3 mb-3">
-      <div class="col-lg-12">
+      <div class="col-lg-3">
+        <table class="table table-sm text-center" id="users-names">
+          <thead>
+            <tr>
+                <th scope="col">Name</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-9">
         <table class="table table-sm" id="users-in">
           <thead>
             <tr>
@@ -82,16 +96,6 @@
           <tbody>
           </tbody>
         </table>
-        <hr>
-      </div>
-      <div class="col-lg-3 offset-lg-3 text-center">
-        <h3>Users Out</h3>
-        <div id="users-out-list"></div>
-      </div>
-
-      <div class="col-lg-3 text-center">
-        <h3>Users In</h3>
-        <div id="users-in-list"></div>
       </div>
     </div>
 
@@ -144,13 +148,10 @@
     var ctx = document.getElementById("myChart").getContext('2d');
 
     $(document).ready(function () {
-
       timeTable();
-      loadUsers();
 
-      window.setInterval(function(){
+      window.setInterval(function () {
         timeTable();
-        loadUsers();
       }, 300000);
 
       $('table').on('click', '.employee-log', function () {

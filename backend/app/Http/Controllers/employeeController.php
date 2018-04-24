@@ -9,13 +9,13 @@ class employeeController extends Controller
 {   
     public function employeesIn()
     {   
-        $employees = employee::where('inorout', '=', 1)->pluck('name');
+        $employees = employee::where('inorout', '=', 1)->get();
         return $employees;
     }
 
     public function employeesOut()
     {   
-        $employees = employee::where('inorout', '=', 0)->pluck('name');
+        $employees = employee::where('inorout', '=', 0)->get();
         return $employees;
     }
 
