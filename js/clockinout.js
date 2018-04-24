@@ -70,8 +70,10 @@ function timeTable(){
             row = '<tr>';
             placed = 0;
             $timezone_offset = 0;
-
+            namerow = '';
             for (var j = 2; j < (usersin[i].length); j++) {
+                td = '';
+                employe_status_class = '';
                 // start position of the current entry
                 displacement = positions[parseInt(usersin[i][j].substr(0, 2)) - $timezone_offset];
                 // end position of the current entry
@@ -79,12 +81,13 @@ function timeTable(){
                 if ((j + 1) >= usersin[i].length) {
                     odd = true;
                     nextDisplacement = positions[n];
-                    button = '<button class="btn btn-info btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5); + '</span></button>';
+                    button = '<button class="btn btn-primary btn-block employee-log employee-in" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5); + '</span></button>';
+                    employe_status_class = 'employee-in';
                 } else {
                     nextDisplacement = positions[parseInt(usersin[i][j + 1].substr(0, 2)) - $timezone_offset];
-                    button = '<button class="btn btn-warning btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5) + '</span> - <span class="float-right">'+ (usersin[i][j + 1]).substring(0, 5) +'</span></button>';
+                    button = '<button class="btn btn-warning btn-block employee-log employee-out" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5) + '</span> - <span class="float-right">'+ (usersin[i][j + 1]).substring(0, 5) +'</span></button>';
+                    employe_status_class = 'employee-out';
                 }
-                td = '';
 
                 // if it starts at 6
                 if (displacement == 0) {
@@ -106,10 +109,9 @@ function timeTable(){
                     j++;
                 }
 
-                namerow = '<tr><td><button class="btn btn-info btn-block employee-log" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + '</button></td></tr>';
-                $('#users-names tbody').append(namerow);
+                namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + '</button></td></tr>';
             }
-
+            $('#users-names tbody').append(namerow);
             row = row + '</tr>';
             $('#users-in tbody').append(row);
         }
@@ -122,14 +124,14 @@ function loadUsers() {
     $.getJSON("backend/public/api/employeesOut", function (usersout) {
         $('#users-out-count').html(usersout.length);
         for (var i = 0; i < usersout.length; i++) {
-            button = '<button class="btn btn-warning employee-log mr-1 mb-1" data-toggle="modal" data-target="#modal" data-id="' + usersout[i]['id'] + '">' + usersout[i]['name'] + '</button>';
+            button = '<button class="btn btn-warning employee-log employee-out mr-1 mb-1" data-toggle="modal" data-target="#modal" data-id="' + usersout[i]['id'] + '">' + usersout[i]['name'] + '</button>';
             $('#users-out-list').append(button)
         }
     });
     $.getJSON("backend/public/api/employeesIn", function (usersin) {
         $('#users-in-count').html(usersin.length);
         for (var i = 0; i < usersin.length; i++) {
-            button = '<button class="btn btn-success employee-log mr-1 mb-1" data-toggle="modal" data-target="#modal" data-id="' + usersin[i]['id'] + '">' + usersin[i]['name'] + '</button>';
+            button = '<button class="btn btn-success employee-log employee-in mr-1 mb-1" data-toggle="modal" data-target="#modal" data-id="' + usersin[i]['id'] + '">' + usersin[i]['name'] + '</button>';
             $('#users-in-list').append(button);
         }
     });
