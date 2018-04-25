@@ -1,6 +1,7 @@
 # CLOCKINOUT
-CLOCKINOUT is a webapp to keep track of employees. It has three main components:
+CLOCKINOUT is a webapp to keep track of employees. It has four main components:
 - Timetable
+- List
 - Keypad
 - Management
 
