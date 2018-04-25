@@ -5,7 +5,10 @@ CLOCKINOUT is a webapp to keep track of employees. It has three main components:
 - Management
 
 ## Timetable
-The timetable displays which users have or are currently clocked in for the current day.
+The timetable displays at what time an employee clocks in or out
+
+## List
+The list view conviently displays which users are in or out.
 
 ## Keypad
 The keypad view is the way employees interact with the system. They punch in their four digit code and then the system will either clock them in or out according to their current status. This view was developed to be accessed from an old ipad I had lying around. 
