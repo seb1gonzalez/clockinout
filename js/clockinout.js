@@ -68,15 +68,23 @@ function loadBarChart(eId) {
 }
 
 function timeTable(){
+    positions = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 2, 9: 3, 10: 4, 11: 5, 12: 6, 13: 7, 14: 8, 15: 9, 16: 10, 17: 11, 18: 12, 19: 12, 20: 12, 21: 12, 22: 12, 23: 12, 24: 12 };
+    var d = new Date();
+    var n = d.getHours();
+
     $('#users-in tbody tr').remove();
     $('#users-names tbody tr').remove();
     $.getJSON("backend/public/api/usersLogs", function (usersin) {
+
         for (var i = 0; i < usersin.length; i++) {
             button = '';
             row = '<tr>';
             placed = 0;
             $timezone_offset = 0;
             namerow = '';
+            todayTotalHours = 0;
+            today = new Date();
+            todayYMD = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             for (var j = 2; j < (usersin[i].length); j++) {
                 td = '';
                 employe_status_class = '';
@@ -85,11 +93,21 @@ function timeTable(){
                 // end position of the current entry
                 odd = false;
                 if ((j + 1) >= usersin[i].length) {
+                    // Calculate hours workded today
+                    currDate = new Date(todayYMD + ' ' + usersin[i][j]);
+                    todayTotalHours += (today - currDate) / 3600000;
+                    // Change odd to true
                     odd = true;
+                    // 
                     nextDisplacement = positions[n];
                     button = '<button class="btn btn-primary btn-block employee-log employee-in" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5); + '</span></button>';
                     employe_status_class = 'employee-in';
                 } else {
+                    // Calculate hours workded today
+                    currDate = new Date(todayYMD + ' ' + usersin[i][j]);
+                    nextDate = new Date(todayYMD + ' ' + usersin[i][j+1]);
+                    todayTotalHours += (nextDate - currDate) / 3600000;
+
                     nextDisplacement = positions[parseInt(usersin[i][j + 1].substr(0, 2)) - $timezone_offset];
                     button = '<button class="btn btn-warning btn-block employee-log employee-out" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5) + '</span> - <span class="float-right">'+ (usersin[i][j + 1]).substring(0, 5) +'</span></button>';
                     employe_status_class = 'employee-out';
@@ -114,8 +132,7 @@ function timeTable(){
                     row = row + td;
                     j++;
                 }
-
-                namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + '</button></td></tr>';
+                namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
             }
             $('#users-names tbody').append(namerow);
             row = row + '</tr>';
