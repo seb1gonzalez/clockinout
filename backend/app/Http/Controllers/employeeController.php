@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class employeeController extends Controller
 {   
+    public function deleteEmployee($id)
+    {   
+        $employee = employee::find($id);
+        $employee->delete();
+
+        return 'removed';
+    }
+
     public function employeesIn()
     {   
         $employees = employee::where('inorout', '=', 1)->get();

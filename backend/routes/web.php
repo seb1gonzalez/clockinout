@@ -35,6 +35,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->put('updateEmployee/{id}',  ['uses' => 'employeeController@updateEmployee']);
 
+    $router->get('employee/{id}',  ['uses' => 'employeeController@deleteEmployee']);
+
     // LOGS
 
     $router->post('clockinorout/{id}',  ['uses' => 'logsController@clockinorout']);

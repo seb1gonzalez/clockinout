@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/open-iconic/font/css/open-iconic.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <style>
@@ -98,6 +99,7 @@
                   <th>Name</th>
                   <th>Classification</th>
                   <th>PIN</th>
+                  <th>Edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -176,11 +178,31 @@
         $('#employees tbody tr').remove();
         employees = $.get('backend/public/api/employees', function(employees){
           for(var i = 0; i < employees.length; i++){
-            tr = '<tr><td>'+ employees[i].name +'</td><td>'+ employees[i].classification +'</td><td>'+ employees[i].pin +'</td></tr>';
+            tr = '<tr><td>'+ employees[i].name +'</td><td>'+ employees[i].classification +'</td><td>'+ employees[i].pin +'</td><td><button class="btn btn-danger delete-user" data-toggle="modal" data-target="#modal" data-id="'+ employees[i].id +'" data-name="'+ employees[i].name +'"><ion-icon name="more"></ion-icon><span class="oi" data-glyph="trash" title="icon name" aria-hidden="true"></span></button></td></tr>';
             $('#employees').append(tr);
           }
         });
       }
+
+      $('#employees').on('click', '.delete-user', function () {
+        eName = $(this).attr('data-name');
+        eId = $(this).attr('data-id');
+        message = '<strong>Are you sure you want to remove '+eName+' from the system?\n</strong>';
+        message += '<button class="btn btn-danger btn-block delete-employee" data-id="'+ eId +'">Delete</button>';
+        modalMessage(message);
+      });
+
+      $('#modal_message_area').on('click', '.delete-employee', function (){
+        eId = $(this).attr('data-id');
+        $.ajax({
+            url: 'backend/public/api/employee/'+eId,
+            type: 'GET',
+            success: function() {
+              modalMessage('Users was removed.');
+              loadEmployees();
+            }
+        });
+      });
 
       $(document).ready(function(){
         $('#add_employee').click(function(){
