@@ -35,7 +35,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->put('updateEmployee/{id}',  ['uses' => 'employeeController@updateEmployee']);
 
-    $router->get('employee/{id}',  ['uses' => 'employeeController@deleteEmployee']);
+    $router->delete('employee/{id}',  ['uses' => 'employeeController@deleteEmployee']);
 
     // LOGS
 

@@ -196,7 +196,7 @@
         eId = $(this).attr('data-id');
         $.ajax({
             url: 'backend/public/api/employee/'+eId,
-            type: 'GET',
+            type: 'DELETE',
             success: function() {
               modalMessage('Users was removed.');
               loadEmployees();
