@@ -10,7 +10,7 @@ class logsController extends Controller
 {   
     public function weeklyLog($eId)
     {   
-        $weekStart = json_decode(json_encode(new \DateTime("last monday")), True);
+        $weekStart = json_decode(json_encode(new \DateTime("last sunday")), True);
         $date = $weekStart['date'];
         $logs = DB::table('logs')->where('time', '>', $date)->where('eId', $eId)->orderBy('time', 'asc')->pluck('time');
         return response()->json($logs);                
