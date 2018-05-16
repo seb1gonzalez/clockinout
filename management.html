@@ -84,6 +84,9 @@
           <label>PIN:</label>
           <input type="text" class="form-control" maxlength="4" id="employee_pin">
 
+          <label>Email:</label>
+          <input type="text" class="form-control" id="employee_email">
+
           <button class="btn btn-success btn-block mt-3" id="add_employee" data-toggle="modal" data-target="#modal">
             Submit
           </button>
@@ -147,9 +150,10 @@
       function clearInputFields(){
         $('#employee_name').val('');
         $('#employee_pin').val('');
+        $('#employee_email').val('');
       }
 
-      function addEmployee(name, classification, pin){
+      function addEmployee(name, classification, pin, email){
         $.get( "backend/public/api/pinLookUp/"+pin, function(response){
           if(response.pin == pin){
             modalMessage("<h3>This pin is already in use, try a different one.</h3>");
@@ -159,7 +163,7 @@
             }else if(pin.length != 4){
               modalMessage("<h3>PIN lenght must be four characters</h3>");
             }else{
-              data = {name: name, classification: classification, pin: pin, inorout: 0};
+              data = {name: name, classification: classification, pin: pin, inorout: 0, email: email};
               employee = $.post('backend/public/api/employees', data, function(employee){
                 modalMessage('Employee ' + employee.name + ' has been successfully added!');
                 loadEmployees();
@@ -178,17 +182,48 @@
         $('#employees tbody tr').remove();
         employees = $.get('backend/public/api/employees', function(employees){
           for(var i = 0; i < employees.length; i++){
-            tr = '<tr><td>'+ employees[i].name +'</td><td>'+ employees[i].classification +'</td><td>'+ employees[i].pin +'</td><td><button class="btn btn-danger delete-user" data-toggle="modal" data-target="#modal" data-id="'+ employees[i].id +'" data-name="'+ employees[i].name +'"><ion-icon name="more"></ion-icon><span class="oi" data-glyph="trash" title="icon name" aria-hidden="true"></span></button></td></tr>';
+            tr = '<tr><td>'+ employees[i].name +'</td><td>'+ employees[i].classification +'</td><td>'+ employees[i].pin +'</td><td><button class="btn btn-primary edit-user" data-toggle="modal" data-target="#modal" data-id="'+ employees[i].id +'" data-name="'+ employees[i].name +'" data-pin="'+ employees[i].pin +'" data-classification="'+ employees[i].classification +'" data-email="'+ employees[i].email +'"><ion-icon name="more"></ion-icon><span class="oi" data-glyph="menu" title="icon name" aria-hidden="true"></span></button></td></tr>';
             $('#employees').append(tr);
           }
         });
       }
 
-      $('#employees').on('click', '.delete-user', function () {
-        eName = $(this).attr('data-name');
+      $('#employees').on('click', '.edit-user', function () {
         eId = $(this).attr('data-id');
-        message = '<strong>Are you sure you want to remove '+eName+' from the system?\n</strong>';
-        message += '<button class="btn btn-danger btn-block delete-employee" data-id="'+ eId +'">Delete</button>';
+        eName = $(this).attr('data-name');
+        ePIN = $(this).attr('data-pin');
+        eClassification = $(this).attr('data-classification');
+        eEmail = $(this).attr('data-email');
+
+        message = '<label>Name:</label>';
+        message = message + '<input type="text" class="form-control" value="'+ eName +'" id="update-name">';
+        message = message + '<label>Classification:</label>';
+        switch(true){
+          case (eClassification == 'Volunteer'):
+            message = message + '<select class="form-control" id="update-classification"><option selected>Volunteer</option><option>Undergraduate</option><option>Graduate</option><option>Staff</option><option>Faculty</option></select>';
+          break;
+          case (eClassification == 'Undergraduate'):
+            message = message + '<select class="form-control" id="update-classification"><option>Volunteer</option><option selected>Undergraduate</option><option>Graduate</option><option>Staff</option><option>Faculty</option></select>';
+          break;
+          case (eClassification == 'Graduate'):
+            message = message + '<select class="form-control" id="update-classification"><option>Volunteer</option><option>Undergraduate</option><option selected>Graduate</option><option>Staff</option><option>Faculty</option></select>';
+          break;
+          case (eClassification == 'Staff'):
+            message = message + '<select class="form-control" id="update-classification"><option>Volunteer</option><option>Undergraduate</option><option>Graduate</option><option selected>Staff</option><option>Faculty</option></select>';
+          break;
+          case (eClassification == 'Faculty'):
+            message = message + '<select class="form-control" id="update-classification"><option>Volunteer</option><option>Undergraduate</option><option>Graduate</option><option>Staff</option><option selected>Faculty</option></select>';
+          break;
+          default:
+          break;
+        }
+        message = message + '<label>PIN:</label>';
+        message = message + '<input type="text" class="form-control" maxlength="4" value="'+ ePIN +'" id="update-pin">';
+        message = message + '<label>Email:</label>';
+        message = message + '<input type="text" class="form-control" value="'+ eEmail +'" id="update-email">';
+
+        message = message + '<button class="btn btn-primary btn-block update-employee mt-3" data-id="'+ eId +'">Update</button>';
+        message = message + '<button class="btn btn-danger btn-block delete-employee mt-3" data-id="'+ eId +'">Delete</button>';
         modalMessage(message);
       });
 
@@ -198,7 +233,24 @@
             url: 'backend/public/api/employee/'+eId,
             type: 'DELETE',
             success: function() {
-              modalMessage('Users was removed.');
+              modalMessage('User was removed');
+              loadEmployees();
+            }
+        });
+      });
+
+      $('#modal_message_area').on('click', '.update-employee', function (){
+        eId = $(this).attr('data-id');
+        eName = $('#update-name').val();
+        ePIN = $('#update-pin').val();
+        eClassification = $('#update-classification').val();
+        eClassification = $('#update-email').val();
+
+        $.ajax({
+            url: 'backend/public/api/updateEmployee/'+eId+'?name='+eName+'&classification='+eClassification+'&pin='+ePIN+'&email='+eEmail,
+            type: 'PUT',
+            success: function() {
+              modalMessage('User account was updated');
               loadEmployees();
             }
         });
@@ -206,7 +258,7 @@
 
       $(document).ready(function(){
         $('#add_employee').click(function(){
-          addEmployee($('#employee_name').val(), $('#employee_classification').val(), $('#employee_pin').val());
+          addEmployee($('#employee_name').val(), $('#employee_classification').val(), $('#employee_pin').val(), $('#employee_email').val());
         });
         loadEmployees();
       });

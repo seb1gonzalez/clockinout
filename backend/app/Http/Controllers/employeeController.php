@@ -29,7 +29,7 @@ class employeeController extends Controller
 
     public function showAllEmployees()
     {   
-        return response()->json(employee::all());
+        return response()->json(employee::orderBy('name', 'asc')->get());
     }
 
     public function employee($id)
@@ -52,7 +52,7 @@ class employeeController extends Controller
     }
 
     public function updateEmployee($id, Request $request)
-    {
+    {   
         $employee = employee::findOrFail($id);
         $employee->update($request->all());
 
