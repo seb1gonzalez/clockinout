@@ -54,7 +54,8 @@ class logsController extends Controller
         $employee = DB::table('employees')->where('pin', $pin)->first();
 
         if($employee == NULL){
-            return response()->json(2, 200);
+            $response = "2,NULL";
+            return response()->json($response, 200);
         }
 
         if($employee->inorout){
@@ -67,7 +68,8 @@ class logsController extends Controller
                 ['eId' => $employee->id, 'inorout' => 0, 'name' => $employee->name, 'flag' => 0]
             );
 
-            return response()->json(0, 200);
+            $response = "0," . $employee->name;
+            return response()->json($response, 200);
             
         }else{
             // log user in
@@ -79,7 +81,8 @@ class logsController extends Controller
                 ['eId' => $employee->id, 'inorout' => 1, 'name' => $employee->name, 'flag' => 0]
             );
 
-            return response()->json(1, 200);
+            $response = "1," . $employee->name;
+            return response()->json($response, 200);
 
         }
         

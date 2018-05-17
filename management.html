@@ -85,7 +85,7 @@
           <input type="text" class="form-control" maxlength="4" id="employee_pin">
 
           <label>Email:</label>
-          <input type="text" class="form-control" id="employee_email">
+          <input type="email" class="form-control" id="employee_email">
 
           <button class="btn btn-success btn-block mt-3" id="add_employee" data-toggle="modal" data-target="#modal">
             Submit
@@ -220,7 +220,7 @@
         message = message + '<label>PIN:</label>';
         message = message + '<input type="text" class="form-control" maxlength="4" value="'+ ePIN +'" id="update-pin">';
         message = message + '<label>Email:</label>';
-        message = message + '<input type="text" class="form-control" value="'+ eEmail +'" id="update-email">';
+        message = message + '<input type="email" class="form-control" value="'+ eEmail +'" id="update-email">';
 
         message = message + '<button class="btn btn-primary btn-block update-employee mt-3" data-id="'+ eId +'">Update</button>';
         message = message + '<button class="btn btn-danger btn-block delete-employee mt-3" data-id="'+ eId +'">Delete</button>';

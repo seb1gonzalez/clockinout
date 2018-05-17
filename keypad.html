@@ -180,12 +180,13 @@
 
                 $.post('backend/public/api/clockinorout/'+curr_val, function(response){
                     // $('#infoModal').modal('show');
-                    if(response == 0){
-                        updateModalMessage("You've successfully clocked out");
+                    response = response.split(",");
+                    if(response[0] == 0){
+                        updateModalMessage(response[1] + ", you've successfully clocked out");
                         resetCurrVal();
                         disableEnterButton();
-                    }else if(response == 1){
-                        updateModalMessage("You've successfully clocked in");
+                    }else if(response[0] == 1){
+                        updateModalMessage(response[1] + ", you've successfully clocked in");
                         resetCurrVal();
                         disableEnterButton();
                     }else{
