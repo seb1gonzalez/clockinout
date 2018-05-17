@@ -68,6 +68,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="management.html">Management</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php?exit=true">Exit</a>
+                      </li>
                 </ul>
             </div>
         </div>
@@ -135,6 +138,17 @@
     <script src="js/clockinout.js"></script>
 
     <script>
+        function loggedIn(){
+            data = {status: true};
+            $.post('login.php', data, function(response){
+                if(response == 0){
+                window.location.href = "login.html";
+                }else{
+                    // User is logged in :)
+                }
+            });
+        }
+
         positions = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 1, 8: 2, 9: 3, 10: 4, 11: 5, 12: 6, 13: 7, 14: 8, 15: 9, 16: 10, 17: 11, 18: 12, 19: 12, 20: 12, 21: 12, 22: 12, 23: 12, 24: 12 };
         var d = new Date();
         var n = d.getHours();
@@ -142,6 +156,7 @@
         var ctx = document.getElementById("myChart").getContext('2d');
 
         $(document).ready(function () {
+            loggedIn();
             loadUsers();
             window.setInterval(function () {
                 loadUsers();

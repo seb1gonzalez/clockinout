@@ -56,6 +56,9 @@
             <li class="nav-item active">
               <a class="nav-link" href="management.html">Management</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php?exit=true">Exit</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -147,6 +150,18 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script>
+
+      function loggedIn(){
+        data = {status: true};
+        $.post('login.php', data, function(response){
+            if(response == 0){
+              window.location.href = "login.html";
+            }else{
+                // User is logged in :)
+            }
+        });
+      }
+
       function clearInputFields(){
         $('#employee_name').val('');
         $('#employee_pin').val('');
@@ -257,6 +272,7 @@
       });
 
       $(document).ready(function(){
+        loggedIn();
         $('#add_employee').click(function(){
           addEmployee($('#employee_name').val(), $('#employee_classification').val(), $('#employee_pin').val(), $('#employee_email').val());
         });

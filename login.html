@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CTIS Clock in & out machine</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <style>
+      body {
+        padding-top: 54px;
+      }
+      @media (min-width: 992px) {
+        body {
+          padding-top: 56px;
+        }
+      }
+      #pin{
+          height: 48px;
+      }
+      .btn-keypad {
+          width: 78px !important;
+          }
+    </style>
+    <link href="vendor/open-iconic/font/css/open-iconic.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row mt-3">
+        <div class="col-lg-4 mb-1 offset-lg-4 text-center">
+
+          <img src="http://ctis.utep.edu/CTIS_logo2.gif" class="img-fluid mb-3" width="150px">
+
+          <div class="alert alert-primary show" role="alert" id="message_area">
+            <div id="message">Enter password to access clockinout</div>
+          </div>
+
+          <input id="password" type="password" class="form-control text-center" placeholder="********" required>
+          <button id="enter-password" class="btn btn-primary btn-block mt-3">Enter</button>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center" id="message">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        function resetMessage(){
+          $('#message').html('Enter your PIN to clock in/out');
+        }
+        
+        function updateModalMessage(message){
+            $('#message').html(message);
+            alert(message);
+        }
+
+        $(document).ready(function(){
+
+            $('#enter-password').click(function(){
+                newPassword = $('#password').val();
+                data = {password: newPassword};
+                $.post('login.php', data, function(response){
+                    if(response == 0){
+                        updateModalMessage("Wrong Password");    
+                    }else{
+                        updateModalMessage("Correct!");
+                        window.location.href = "index.html";
+                    }
+                });
+            });
+        });
+    </script>
+
+  </body>
+</html>
