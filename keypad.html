@@ -1,231 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>CTIS Clock in & out machine</title>
+  <title>CTIS Clock in & out machine</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <style>
+  <!-- Custom styles for this template -->
+  <style>
+    body {
+      padding-top: 54px;
+    }
+    @media (min-width: 992px) {
       body {
-        padding-top: 54px;
+        padding-top: 56px;
       }
-      @media (min-width: 992px) {
-        body {
-          padding-top: 56px;
-        }
-      }
-      #pin{
-          height: 48px;
-      }
-      .btn-keypad {
-          width: 78px !important;
-          }
-    </style>
-    <link href="vendor/open-iconic/font/css/open-iconic.css" rel="stylesheet">
+    }
+    #pin{
+      height: 48px;
+    }
+    .btn-keypad {
+      width: 78px !important;
+    }
+  </style>
+  <link href="vendor/open-iconic/font/css/open-iconic.css" rel="stylesheet">
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
 
-        </div>
+  </div>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+  <div class="row mt-3">
+    <div class="col-lg-4 mb-1 offset-lg-4 text-center">
+
+      <img src="http://ctis.utep.edu/CTIS_logo2.gif" class="img-fluid mb-3" width="150px">
+
+      <div class="alert alert-warning show" role="alert" id="message_area">
+        <div id="message">Enter your PIN to clock in/out</div>
       </div>
-    </nav>
 
-    <!-- Page Content -->
-    <div class="container">
-      <div class="row mt-3">
-        <div class="col-lg-4 mb-1 offset-lg-4 text-center">
-
-          <!--<h3 id="ip"></h3><br>-->
-
-          <img src="http://ctis.utep.edu/CTIS_logo2.gif" class="img-fluid mb-3" width="150px">
-
-          <div class="alert alert-warning show" role="alert" id="message_area">
-            <div id="message">Enter your PIN to clock in/out</div>
-          </div>
-
-          <div class="col-lg-12">
-            <h1><div id="pin"></div></h1><hr>
-            <button class="btn btn-primary keypad-number btn-keypad" id="1">
-                <h1>1</h1>
-            </button>
-            <button class="btn btn-primary keypad-number btn-keypad" id="2">
-                <h1>2</h1>
-            </button>
-            <button class="btn btn-primary keypad-number btn-keypad" id="3">
-                <h1>3</h1>
-            </button>
-          </div>
-          <div class="col-lg-12 mt-1">
-            <button class="btn btn-primary keypad-number btn-keypad" id="4">
-                <h1>4</h1>
-            </button>
-            <button class="btn btn-primary keypad-number btn-keypad" id="5">
-                <h1>5</h1>
-            </button>
-            <button class="btn btn-primary keypad-number btn-keypad" id="6">
-                <h1>6</h1>
-            </button>
-          </div>
-          <div class="col-lg-12 mt-1">
-            <button class="btn btn-primary keypad-number btn-keypad" id="7">
-                <h1>7</h1>
-            </button>
-            <button class="btn btn-primary keypad-number btn-keypad" id="8">
-                <h1>8</h1>
-            </button>
-            <button class="btn btn-primary keypad-number btn-keypad" id="9">
-                <h1>9</h1>
-            </button>
-          </div>
-
-          <div class="col-lg-12 mt-1">
-            <button class="btn btn-warning keypad-delete btn-keypad">
-                <h1>
-                    <span class="oi" data-glyph="delete" title="icon name" aria-hidden="true"></span>
-                </h1>
-            </button>
-            <button class="btn btn-primary keypad-number btn-keypad" id="0">
-                <h1>0</h1>
-            </button>
-            <button class="btn btn-default keypad-enter btn-keypad" disabled>
-                <h1>
-                    <span class="oi" data-glyph="account-login" title="icon name" aria-hidden="true"></span>
-                </h1>
-            </button>
-          </div>
-
-
-        </div>
+      <div class="col-lg-12">
+        <h1><div id="pin"></div></h1><hr>
+        <button class="btn btn-primary keypad-number btn-keypad" id="1">
+          <h1>1</h1>
+        </button>
+        <button class="btn btn-primary keypad-number btn-keypad" id="2">
+          <h1>2</h1>
+        </button>
+        <button class="btn btn-primary keypad-number btn-keypad" id="3">
+          <h1>3</h1>
+        </button>
       </div>
+      <div class="col-lg-12 mt-1">
+        <button class="btn btn-primary keypad-number btn-keypad" id="4">
+          <h1>4</h1>
+        </button>
+        <button class="btn btn-primary keypad-number btn-keypad" id="5">
+          <h1>5</h1>
+        </button>
+        <button class="btn btn-primary keypad-number btn-keypad" id="6">
+          <h1>6</h1>
+        </button>
+      </div>
+      <div class="col-lg-12 mt-1">
+        <button class="btn btn-primary keypad-number btn-keypad" id="7">
+          <h1>7</h1>
+        </button>
+        <button class="btn btn-primary keypad-number btn-keypad" id="8">
+          <h1>8</h1>
+        </button>
+        <button class="btn btn-primary keypad-number btn-keypad" id="9">
+          <h1>9</h1>
+        </button>
+      </div>
+
+      <div class="col-lg-12 mt-1">
+        <button class="btn btn-warning keypad-delete btn-keypad">
+          <h1>
+            <span class="oi" data-glyph="delete" title="icon name" aria-hidden="true"></span>
+          </h1>
+        </button>
+        <button class="btn btn-primary keypad-number btn-keypad" id="0">
+          <h1>0</h1>
+        </button>
+        <button class="btn btn-default keypad-enter btn-keypad" disabled>
+          <h1>
+            <span class="oi" data-glyph="account-login" title="icon name" aria-hidden="true"></span>
+          </h1>
+        </button>
+      </div>
+
 
     </div>
+  </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body text-center" id="message">
+</div>
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
-          </div>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center" id="message">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
 
-        function resetMessage(){
-          $('#message').html('Enter your PIN to clock in/out');
-        }
-        function enableEnterButton(){
-            $('.keypad-enter').removeClass('btn-default');
-            $('.keypad-enter').addClass('btn-success');
-            $('.keypad-enter').removeAttr('disabled');
-        }
-        function disableEnterButton(){
-            $('.keypad-enter').removeClass('btn-success');
-            $('.keypad-enter').addClass('btn-default');
-            $('.keypad-enter').attr('disabled', 'disabled');
-        }
-        function resetCurrVal(){
-            curr_val = '';
-            $('#pin').html(curr_val);
-        }
-        function updateModalMessage(message){
-            $('#message').html(message);
-            alert(message);
-        }
-
-
+    function resetMessage(){
+        $('#message').html('Enter your PIN to clock in/out');
+    }
+    function enableEnterButton(){
+        $('.keypad-enter').removeClass('btn-default');
+        $('.keypad-enter').addClass('btn-success');
+        $('.keypad-enter').removeAttr('disabled');
+    }
+    function disableEnterButton(){
+        $('.keypad-enter').removeClass('btn-success');
+        $('.keypad-enter').addClass('btn-default');
+        $('.keypad-enter').attr('disabled', 'disabled');
+    }
+    function resetCurrVal(){
         curr_val = '';
-        $(document).ready(function(){
-            //function loggedIn(){ //change here
-            data = {status: true};
-            $.post('login.php', data, function(response){
-                if(response == 0){
-                    window.location.href = "login.html";
+        $('#pin').html(curr_val);
+    }
+    function updateModalMessage(message){
+        $('#message').html(message);
+        alert(message);
+    }
+
+
+    curr_val = '';
+    $(document).ready(function(){
+        //function loggedIn(){ //change here
+        data = {status: true};
+        $.post('login.php', data, function(response){
+            if(response == 0){
+                window.location.href = "login.html";
+            }else{
+                // User is logged in :)
+            }
+        });
+        //}
+
+        $('.keypad-number').click(function(){
+            if(curr_val.length < 4){
+                curr_val = curr_val + this.id;
+                $('#pin').html(curr_val);
+            }
+            if(curr_val.length == 4){
+                enableEnterButton();
+            }
+        });
+        $('.keypad-delete').click(function(){
+            if(curr_val.length >= 1){
+                curr_val = curr_val.substring(0, curr_val.length-1);
+                $('#pin').html(curr_val);
+            }
+
+            if(curr_val.length < 4){
+                disableEnterButton();
+            }
+        });
+        $('.keypad-enter').click(function(){
+
+            $.post('backend/public/api/clockinorout/'+curr_val, function(response){
+                // $('#infoModal').modal('show');
+                response = response.split(",");
+                if(response[0] == 0){
+                    updateModalMessage(response[1] + ", you've successfully clocked out");
+                    resetCurrVal();
+                    disableEnterButton();
+                }else if(response[0] == 1){
+                    updateModalMessage(response[1] + ", you've successfully clocked in");
+                    resetCurrVal();
+                    disableEnterButton();
                 }else{
-                    // User is logged in :)
-                }
-            });
-            //}
-
-            let ip_address;
-            let all_info;
-            // $.get("https://ipinfo.io/json", function (response) {
-            //     ip_address = response.ip;
-            //     $("#ip").append(ip_address);
-            //     all_info = response.city + ", " + response.region + ". " + response.org;
-            // }, "jsonp");
-
-            $('.keypad-number').click(function(){
-                if(curr_val.length < 4){
-                    curr_val = curr_val + this.id;
-                    $('#pin').html(curr_val);
-                }
-                if(curr_val.length == 4){
-                    enableEnterButton();
-                }
-            });
-            $('.keypad-delete').click(function(){
-                if(curr_val.length >= 1){
-                    curr_val = curr_val.substring(0, curr_val.length-1);
-                    $('#pin').html(curr_val);
-                }
-
-                if(curr_val.length < 4){
+                    updateModalMessage("Wrong PIN, try again!");
+                    resetCurrVal();
                     disableEnterButton();
                 }
-            });
-            $('.keypad-enter').click(function(){
-                $.post('backend/public/api/clockinorout/'+curr_val, function(response){
-                    // $('#infoModal').modal('show');
-                    response = response.split(",");
-                    if(response[0] == 0){
-                        updateModalMessage(response[1] + ", you've successfully clocked out");
-                        resetCurrVal();
-                        disableEnterButton();
-                    }else if(response[0] == 1){
-                        let user_id =  curr_val;
-                        updateModalMessage(response[1] + ", you've successfully clocked in");
-                        resetCurrVal();
-                        disableEnterButton();
 
-                        // if(ip_address != "129.108.202.162"){ //exterior login
-                        //   let insert = {id: user_id, ip: ip_address, info: all_info};
-                        //   console.log(insert);
-                        //   alert("External login: "+ip_address);
-                        // }
-                    }else{
-                        updateModalMessage("Wrong PIN, try again!");
-                        resetCurrVal();
-                        disableEnterButton();
-                    }
-                    setTimeout(resetMessage, 1500);
-                });
-
+                setTimeout(resetMessage, 1500);
             });
+
         });
-    </script>
+    });
+</script>
 
-  </body>
+</body>
 </html>
