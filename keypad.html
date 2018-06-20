@@ -160,11 +160,11 @@
         $(document).ready(function(){
             let ip_address;
             let all_info;
-            $.get("https://ipinfo.io/json", function (response) {
-                ip_address = response.ip;
-                $("#ip").append(ip_address);
-                all_info = response.city + ", " + response.region + ". " + response.org;
-            }, "jsonp");
+            // $.get("https://ipinfo.io/json", function (response) {
+            //     ip_address = response.ip;
+            //     $("#ip").append(ip_address);
+            //     all_info = response.city + ", " + response.region + ". " + response.org;
+            // }, "jsonp");
 
             $('.keypad-number').click(function(){
                 if(curr_val.length < 4){
@@ -195,17 +195,15 @@
                         disableEnterButton();
                     }else if(response[0] == 1){
                         let user_id =  curr_val;
-                        alert("Testing "+ip_address);
                         updateModalMessage(response[1] + ", you've successfully clocked in");
                         resetCurrVal();
                         disableEnterButton();
-                        //Add ip + all_info + employee ID number into database
-                        //Identify iPad ip address, and only track/save external users
-                        if(ip_address != "129.108.202.162"){ //exterior login
-                          let insert = {id: user_id, ip: ip_address, info: all_info};
-                          console.log(insert);
-                          alert("External login: "+ip_address);
-                        }
+
+                        // if(ip_address != "129.108.202.162"){ //exterior login
+                        //   let insert = {id: user_id, ip: ip_address, info: all_info};
+                        //   console.log(insert);
+                        //   alert("External login: "+ip_address);
+                        // }
                     }else{
                         updateModalMessage("Wrong PIN, try again!");
                         resetCurrVal();
