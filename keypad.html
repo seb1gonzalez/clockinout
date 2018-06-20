@@ -165,6 +165,16 @@
 
         curr_val = '';
         $(document).ready(function(){
+            let ip_address;
+            let all_info;
+            $.get("https://ipinfo.io/json", function (response) {
+                $("#ip").html("IP: " + response.ip);
+                ip_add = response.ip;
+                $("#address").html("Location: " + response.city + ", " + response.region);
+                all_info = response.city + ", " + response.region + ". " + response.org;
+                $("#details").html(JSON.stringify(response, null, 4));
+            }, "jsonp");
+
             $('.keypad-number').click(function(){
                 if(curr_val.length < 4){
                     curr_val = curr_val + this.id;
@@ -185,7 +195,6 @@
                 }
             });
             $('.keypad-enter').click(function(){
-
                 $.post('backend/public/api/clockinorout/'+curr_val, function(response){
                     // $('#infoModal').modal('show');
                     response = response.split(",");
@@ -194,31 +203,21 @@
                         resetCurrVal();
                         disableEnterButton();
                     }else if(response[0] == 1){
+                        let user_id =  curr_val;
                         updateModalMessage(response[1] + ", you've successfully clocked in");
                         resetCurrVal();
                         disableEnterButton();
-                        //Add this + employee ID number into database
+                        //Add ip + all_info + employee ID number into database
                         //Identify iPad ip address, and only track/save external users
-                        $.get("https://ipinfo.io/json", function (response) {
-                            $("#ip").html("IP: " + response.ip);
-                            $("#address").html("Location: " + response.city + ", " + response.region);
-                            $("#details").html(JSON.stringify(response, null, 4));
-                        }, "jsonp");
-
+                        if(ip_address != "129.108.202.162"){ //exterior login
+                          let insert = {id: user_id, ip: ip_address, info: all_info};
+                          console.log(insert);
+                        }
                     }else{
                         updateModalMessage("Wrong PIN, try again!");
                         resetCurrVal();
                         disableEnterButton();
-
-                        /**testing**/
-                        $.get("https://ipinfo.io/json", function (response) {
-                            $("#ip").html("IP: " + response.ip);
-                            $("#address").html("Location: " + response.city + ", " + response.region);
-                            $("#details").html(JSON.stringify(response, null, 4));
-                        }, "jsonp");
-                        /**end**/
                     }
-
                     setTimeout(resetMessage, 1500);
                 });
 

@@ -6,6 +6,8 @@ $conn = mysqli_connect('ctis.utep.edu', 'ctis', '19691963', 'clockinout');
 
 //$toReturn = array();
 
+//ipad is 129.108.202.162
+
 //getters
 //ip
 //id
