@@ -158,6 +158,17 @@
 
         curr_val = '';
         $(document).ready(function(){
+            //function loggedIn(){ //change here
+            data = {status: true};
+            $.post('login.php', data, function(response){
+                if(response == 0){
+                    window.location.href = "login.html";
+                }else{
+                    // User is logged in :)
+                }
+            });
+            //}
+
             let ip_address;
             let all_info;
             // $.get("https://ipinfo.io/json", function (response) {
