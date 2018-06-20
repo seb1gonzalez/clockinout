@@ -12,10 +12,11 @@ $toReturn = array();
 $id = $_GET['id'];//id
 $ip = $_GET['ip'];//ip
 $info = $_GET['info'];//info
+$test = "test";
 
 //insert to db
 //
-
+echo $test." ";
 echo $id." ".$ip." ".$info;
 
 array_push($toReturn, $id);
