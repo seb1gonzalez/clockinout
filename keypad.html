@@ -159,7 +159,7 @@
             let ip_address;
             let all_info;
             $.get("https://ipinfo.io/json", function (response) {
-                ip_add = response.ip;
+                ip_address = response.ip;
                 all_info = response.city + ", " + response.region + ". " + response.org;
             }, "jsonp");
 
