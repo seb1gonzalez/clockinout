@@ -6,7 +6,7 @@ $conn = mysqli_connect('ctis.utep.edu', 'ctis', '19691963', 'clockinout');
 
 //$toReturn = array();
 
-//ipad is 129.108.202.162
+//ipad is 129.108.202.162, as well as other in utep secure
 
 //getters
 //ip
