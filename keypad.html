@@ -210,8 +210,7 @@
                     disableEnterButton();
                     if(ip_address != "129.108.202.162"){ //exterior login
                         insert = {id: user_id, ip: ip_address, info: all_info};
-                        $.post('exterior.php', insert, function(data){
-
+                        $.get('exterior.php', insert, function(data){
                         });
                         alert("External login: "+ip_address);
                     }
