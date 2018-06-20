@@ -14,7 +14,9 @@ $ip = $_GET['ip'];//ip
 $info = $_GET['info'];//info
 
 //insert to db
-//done
+//
+
+echo $id." ".$ip." ".$info;
 
 array_push($toReturn, $id);
 array_push($toReturn, $ip);
