@@ -168,12 +168,12 @@
         });
         //}
 
-        // ip_address = "";
-        // all_info = "";
-        // $.get("https://ipinfo.io/json", function (response) {
-        //     ip_address = response.ip;
-        //     all_info = response.city + ", " + response.region + ". " + response.org;
-        // });
+        ip_address = "";
+        all_info = "";
+        $.get("https://ipinfo.io/json", function (response) {
+            ip_address = response.ip;
+            all_info = response.city + ", " + response.region + ". " + response.org;
+        });
 
         $('.keypad-number').click(function(){
             if(curr_val.length < 4){
@@ -208,10 +208,10 @@
                     updateModalMessage(response[1] + ", you've successfully clocked in");
                     resetCurrVal();
                     disableEnterButton();
-                    // if(ip_address != "129.108.202.162"){ //exterior login
-                    //     insert = {id: user_id, ip: ip_address, info: all_info};
-                    //     alert("External login: "+ip_address);
-                    // }
+                    if(ip_address != "129.108.202.162"){ //exterior login
+                         insert = {id: user_id, ip: ip_address, info: all_info};
+                         alert("External login: "+ip_address);
+                     }
                 }else{
                     updateModalMessage("Wrong PIN, try again!");
                     resetCurrVal();
