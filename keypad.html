@@ -49,6 +49,8 @@
       <div class="row mt-3">
         <div class="col-lg-4 mb-1 offset-lg-4 text-center">
 
+          <h3 id="ip"></h3><br>
+
           <img src="http://ctis.utep.edu/CTIS_logo2.gif" class="img-fluid mb-3" width="150px">
 
           <div class="alert alert-warning show" role="alert" id="message_area">
@@ -160,6 +162,7 @@
             let all_info;
             $.get("https://ipinfo.io/json", function (response) {
                 ip_address = response.ip;
+                $("#ip").append(ip_address);
                 all_info = response.city + ", " + response.region + ". " + response.org;
             }, "jsonp");
 
@@ -192,7 +195,7 @@
                         disableEnterButton();
                     }else if(response[0] == 1){
                         let user_id =  curr_val;
-                        alert("Testing"+ip_address);
+                        alert("Testing "+ip_address);
                         updateModalMessage(response[1] + ", you've successfully clocked in");
                         resetCurrVal();
                         disableEnterButton();
@@ -201,10 +204,7 @@
                         if(ip_address != "129.108.202.162"){ //exterior login
                           let insert = {id: user_id, ip: ip_address, info: all_info};
                           console.log(insert);
-                          alert("External: "+ip_address);
-                        }
-                        else{
-                            alert("Internal: "+ip_address);
+                          alert("External login: "+ip_address);
                         }
                     }else{
                         updateModalMessage("Wrong PIN, try again!");
