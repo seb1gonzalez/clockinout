@@ -192,7 +192,7 @@
                         disableEnterButton();
                     }else if(response[0] == 1){
                         let user_id =  curr_val;
-                        alert("Testing");
+                        alert("Testing"+ip_address);
                         updateModalMessage(response[1] + ", you've successfully clocked in");
                         resetCurrVal();
                         disableEnterButton();
@@ -202,6 +202,9 @@
                           let insert = {id: user_id, ip: ip_address, info: all_info};
                           console.log(insert);
                           alert("External: "+ip_address);
+                        }
+                        else{
+                            alert("Internal: "+ip_address);
                         }
                     }else{
                         updateModalMessage("Wrong PIN, try again!");
