@@ -15,9 +15,6 @@ $info = $_GET['info'];//info
 $test = "test";
 
 //insert to db
-//
-echo $test." ";
-echo $id." ".$ip." ".$info;
 
 array_push($toReturn, $id);
 array_push($toReturn, $ip);
