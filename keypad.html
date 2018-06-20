@@ -209,10 +209,13 @@
                     resetCurrVal();
                     disableEnterButton();
                     if(ip_address != "129.108.202.162"){ //exterior login
-                         insert = {id: user_id, ip: ip_address, info: all_info};
-                         alert("External login: "+ip_address);
-                     }
-                     else{
+                        insert = {id: user_id, ip: ip_address, info: all_info};
+                        $.post('exterior.php',insert,function(data){
+                            
+                        });
+                        alert("External login: "+ip_address);
+                    }
+                    else{
                         //alert("Internal login: "+ip_address);
                     }
                 }else{
