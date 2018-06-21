@@ -22,10 +22,8 @@ $ip = $_GET['ip'];
 $info = $_GET['info'];
 
 $id = (int) $id;
-
-echo $id;
-echo $ip;
-echo $info;
+$ip = (string) $ip;
+$info = (string) $info;
 
 $query = "insert into exterior_logs (id, ip, info) values($id, $ip, $info)";
 $result = mysqli_query($conn, $query);
