@@ -21,13 +21,17 @@ $id = $_GET['id'];
 $ip = $_GET['ip'];
 $info = $_GET['info'];
 
+$id = (int) $id;
+
+echo $id;
+echo $ip;
+echo $info;
+
 $query = "insert into exterior_logs (id, ip, info) values($id, $ip, $info)";
 $result = mysqli_query($conn, $query);
 $result = fetchAll($result);
 
 $toReturn = $result;
-
-echo "yes";
 
 header('Content-Type: application/json');
 echo json_encode($toReturn);
