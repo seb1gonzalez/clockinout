@@ -25,14 +25,10 @@ $id = (int) $id;
 $ip = (string) $ip;
 $info = (string) $info;
 
-$query = "insert into exterior_logs (id, ip, info) values($id, $ip, $info)";
-echo $query;
+$query = "insert into exterior_logs (id, ip, info) values($id, '$ip', '$info')";
 $toReturn['query'] = $query;
 $result = mysqli_query($conn, $query);
 $toReturn['result'] = $result;
-$result = fetchAll($result);
-
-$toReturn = $result;
 
 header('Content-Type: application/json');
 echo json_encode($toReturn);
