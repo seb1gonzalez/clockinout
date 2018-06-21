@@ -27,6 +27,8 @@ $result = fetchAll($result);
 
 $toReturn = $result;
 
+echo "yes";
+
 header('Content-Type: application/json');
 echo json_encode($toReturn);
 $conn->close();
