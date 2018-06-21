@@ -108,7 +108,7 @@
         $('#employees tbody tr').remove();
         employees = $.get('exterior_get.php', function(data){
             for(var i = 0; i < data.length; i++){
-                tr = '<tr><td>'+ data[i].name +'</td><td>'+ data[i].id +'</td><td>'+ data[i].ip +'</td><td>'+ data[i].info +'</td></tr>';
+                tr = '<tr><td>'+ data[i].name +'</td><td>'+ data[i].pin +'</td><td>'+ data[i].ip +'</td><td>'+ data[i].info +'</td></tr>';
                 //tr = '<tr><td>'+ data[i].name +'</td><td>'+ data[i].classification +'</td><td>'+ data[i].pin +'</td><td></tr>';
                 $('#employees').append(tr);
             }
