@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CTIS Clockinout - Exterior Logs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/open-iconic/font/css/open-iconic.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <style>
+        body {
+            padding-top: 54px;
+        }
+        @media (min-width: 992px) {
+            body {
+                padding-top: 56px;
+            }
+        }
+        #pin{
+            height: 48px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">In & Out</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Employees
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="list.html">List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="keypad.html">Keypad</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="management.html">Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.php?exit=true">Exit</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row mt-3">
+        <div class="col-lg-12">
+
+            <h3>Exterior Logins</h3>
+            <table class="table table-sm table-striped table-bordered" id="employees">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>PIN</th>
+                    <th>IP Address</th>
+                    <th>Info</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    function loggedIn(){
+        data = {status: true};
+        $.post('login.php', data, function(response){
+            if(response == 0){
+                window.location.href = "login.html";
+            }else{
+                // User is logged in :)
+            }
+        });
+    }
+
+    function loadEmployees(){
+        $('#employees tbody tr').remove();
+        employees = $.get('exterior_get.php', function(data){
+            for(var i = 0; i < data.length; i++){
+                tr = '<tr><td>'+ data[i].name +'</td><td>'+ data[i].id +'</td><td>'+ data[i].ip +'</td><td>'+ data[i].info +'</td></tr>';
+                //tr = '<tr><td>'+ data[i].name +'</td><td>'+ data[i].classification +'</td><td>'+ data[i].pin +'</td><td></tr>';
+                $('#employees').append(tr);
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        loggedIn();
+        loadEmployees();
+    });
+</script>
+
+</body>
+</html>

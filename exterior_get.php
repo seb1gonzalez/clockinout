@@ -8,14 +8,19 @@ $toReturn = array();
 
 //ipad is 129.108.202.162, as well as other in utep secure
 
-//getters
-$id = $_GET['id'];
-$ip = $_GET['ip'];
-$info = $_GET['info'];
+function fetchAll($r){
+    $temp = array();
+    while($row = mysqli_fetch_assoc($r)){
+        $temp[] = $row;
+    }
+    return $temp;
+}
 
-$query = "insert  into exterior_logs (id, ip, info) values($id, $ip, $info)";
+$query = "select * from exterior_logs";
 $result = mysqli_query($conn, $query);
+$result = fetchAll($result);
 
+$toReturn = $result;
 
 header('Content-Type: application/json');
 echo json_encode($toReturn);
