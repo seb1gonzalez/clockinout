@@ -90,6 +90,9 @@
           <label>Email:</label>
           <input type="email" class="form-control" id="employee_email">
 
+          <label>Phone Number:</label>
+          <input type="text" class="form-control" id="phonenumber">
+
           <button class="btn btn-success btn-block mt-3" id="add_employee" data-toggle="modal" data-target="#modal">
             Submit
           </button>
@@ -105,6 +108,8 @@
                   <th>Name</th>
                   <th>Classification</th>
                   <th>PIN</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
                   <th>Edit</th>
                 </tr>
               </thead>
@@ -166,6 +171,7 @@
         $('#employee_name').val('');
         $('#employee_pin').val('');
         $('#employee_email').val('');
+        $('#phonenumber').val('');
       }
 
       function addEmployee(name, classification, pin, email){
@@ -197,7 +203,7 @@
         $('#employees tbody tr').remove();
         employees = $.get('backend/public/api/employees', function(employees){
           for(var i = 0; i < employees.length; i++){
-            tr = '<tr><td>'+ employees[i].name +'</td><td>'+ employees[i].classification +'</td><td>'+ employees[i].pin +'</td><td><button class="btn btn-primary edit-user" data-toggle="modal" data-target="#modal" data-id="'+ employees[i].id +'" data-name="'+ employees[i].name +'" data-pin="'+ employees[i].pin +'" data-classification="'+ employees[i].classification +'" data-email="'+ employees[i].email +'"><ion-icon name="more"></ion-icon><span class="oi" data-glyph="menu" title="icon name" aria-hidden="true"></span></button></td></tr>';
+            tr = '<tr><td>'+ employees[i].name +'</td><td>'+ employees[i].classification +'</td><td>'+ employees[i].pin +'</td><td>'+ employees[i].email +'</td><td>'+ employees[i].phone_number +'</td><td><button class="btn btn-primary edit-user" data-toggle="modal" data-target="#modal" data-id="'+ employees[i].id +'" data-name="'+ employees[i].name +'" data-pin="'+ employees[i].pin +'" data-classification="'+ employees[i].classification +'" data-email="'+ employees[i].email +'" data-phonenumber="'+ employees[i].phone_number +'"><ion-icon name="more"></ion-icon><span class="oi" data-glyph="menu" title="icon name" aria-hidden="true"></span></button></td></tr>';
             $('#employees').append(tr);
           }
         });
@@ -209,6 +215,7 @@
         ePIN = $(this).attr('data-pin');
         eClassification = $(this).attr('data-classification');
         eEmail = $(this).attr('data-email');
+        ePhonenumber = $(this).attr('data-phonenumber');
 
         message = '<label>Name:</label>';
         message = message + '<input type="text" class="form-control" value="'+ eName +'" id="update-name">';
@@ -236,6 +243,8 @@
         message = message + '<input type="text" class="form-control" maxlength="4" value="'+ ePIN +'" id="update-pin">';
         message = message + '<label>Email:</label>';
         message = message + '<input type="email" class="form-control" value="'+ eEmail +'" id="update-email">';
+        message = message + '<label>Phone Number:</label>';
+        message = message + '<input type="text" class="form-control" value="'+ ePhonenumber +'" id="update-phonenumber">';
 
         message = message + '<button class="btn btn-primary btn-block update-employee mt-3" data-id="'+ eId +'">Update</button>';
         message = message + '<button class="btn btn-danger btn-block delete-employee mt-3" data-id="'+ eId +'">Delete</button>';
@@ -260,9 +269,10 @@
         ePIN = $('#update-pin').val();
         eClassification = $('#update-classification').val();
         eEmail = $('#update-email').val();
+        ePhonenumber = $('#update-phonenumber').val();
 
         $.ajax({
-            url: 'backend/public/api/updateEmployee/'+eId+'?name='+eName+'&classification='+eClassification+'&pin='+ePIN+'&email='+eEmail,
+            url: 'backend/public/api/updateEmployee/'+eId+'?name='+eName+'&classification='+eClassification+'&pin='+ePIN+'&email='+eEmail+'&phone_number='+ePhonenumber,
             type: 'PUT',
             success: function() {
               modalMessage('User account was updated');
@@ -274,7 +284,7 @@
       $(document).ready(function(){
         loggedIn();
         $('#add_employee').click(function(){
-          addEmployee($('#employee_name').val(), $('#employee_classification').val(), $('#employee_pin').val(), $('#employee_email').val());
+          addEmployee($('#employee_name').val(), $('#employee_classification').val(), $('#employee_pin').val(), $('#employee_email').val(), $('#phonenumber').val());
         });
         loadEmployees();
       });
