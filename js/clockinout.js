@@ -85,7 +85,7 @@ function timeTable(){
             todayTotalHours = 0;
             today = new Date();
             todayYMD = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            for (var j = 2; j < (usersin[i].length); j++) {
+            for (var j = 3; j < (usersin[i].length); j++) {
                 console.log(usersin[i]);
                 td = '';
                 employe_status_class = '';
