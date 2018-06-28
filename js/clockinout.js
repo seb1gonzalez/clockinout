@@ -86,6 +86,7 @@ function timeTable(){
             today = new Date();
             todayYMD = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             for (var j = 2; j < (usersin[i].length); j++) {
+                console.log(usersin[i]);
                 td = '';
                 employe_status_class = '';
                 // start position of the current entry
