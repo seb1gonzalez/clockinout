@@ -136,7 +136,7 @@ function timeTable(){
                 namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
                 if(usersin[i][2]){
                     //enumbers = '<tr><td><button class="btn btn-block employee-log">'+usersin[i][2]+'</button></td></tr>';
-                    enumbers = '<tr><td><div style="font-size: xx-small;">'+usersin[i][2]+'</div></td></tr>';
+                    enumbers = '<tr><td><div style="font-size: small;">'+usersin[i][2]+'</div></td></tr>';
                 }
                 else{
                     enumbers = '<tr><td><button class="btn btn-block employee-log">&nbsp;</button></td></tr>';
