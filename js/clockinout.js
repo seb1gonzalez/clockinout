@@ -75,7 +75,6 @@ function timeTable(){
     $('#users-in tbody tr').remove();
     $('#users-names tbody tr').remove();
     $.getJSON("backend/public/api/usersLogs", function (usersin) {
-        console.log(usersin);
         for (var i = 0; i < usersin.length; i++) {
             button = '';
             row = '<tr>';
@@ -86,7 +85,6 @@ function timeTable(){
             today = new Date();
             todayYMD = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             for (var j = 3; j < (usersin[i].length); j++) {
-                console.log(usersin[i]);
                 td = '';
                 employe_status_class = '';
                 // start position of the current entry
@@ -134,10 +132,10 @@ function timeTable(){
                     j++;
                 }
                 namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
-                //numbers = usersin[i][4];
+                numbers = usersin[i][2];
             }
             $('#users-names tbody').append(namerow);
-            //$('#users-numbers tbody').append(numbers);
+            $('#users-numbers tbody').append(numbers);
             row = row + '</tr>';
             $('#users-in tbody').append(row);
         }
