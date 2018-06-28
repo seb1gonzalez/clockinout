@@ -40,6 +40,7 @@ class logsController extends Controller
             $responseItem = [];
             array_push($responseItem, $userin['id']);
             array_push($responseItem, $userin['name']);
+            array_push($responseItem, $userin['phone_number']);
             foreach($logs AS $log){
                 $temp_log = str_replace(date('Y-m-d') . " ", '', $log);
                 array_push($responseItem, $temp_log);
