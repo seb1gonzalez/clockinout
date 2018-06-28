@@ -133,10 +133,10 @@ function timeTable(){
                     j++;
                 }
                 namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
-                numbers = usersin[0][4];
+                //numbers = usersin[i][4];
             }
             $('#users-names tbody').append(namerow);
-            $('#users-numbers tbody').append(numbers);
+            //$('#users-numbers tbody').append(numbers);
             row = row + '</tr>';
             $('#users-in tbody').append(row);
         }
