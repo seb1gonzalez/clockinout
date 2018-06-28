@@ -81,7 +81,7 @@ function timeTable(){
             placed = 0;
             $timezone_offset = 0;
             namerow = '';
-            enumbers = "<tr><td>N/A</tr></td>";
+            enumbers = "";
             todayTotalHours = 0;
             today = new Date();
             todayYMD = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
