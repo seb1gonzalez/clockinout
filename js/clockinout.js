@@ -75,7 +75,7 @@ function timeTable(){
     $('#users-in tbody tr').remove();
     $('#users-names tbody tr').remove();
     $.getJSON("backend/public/api/usersLogs", function (usersin) {
-
+        console.log(usersin);
         for (var i = 0; i < usersin.length; i++) {
             button = '';
             row = '<tr>';
