@@ -137,7 +137,7 @@ function timeTable(){
                     enumbers = '<tr><td>'+usersin[i][2]+'</td></tr>';
                 }
                 else{
-                    enumbers = '<tr><td><button class="btn btn-primary btn-block employee-log">&nbsp;</button></td></tr>';
+                    enumbers = '<tr><td><button class="btn btn-block employee-log">&nbsp;</button></td></tr>';
                 }
             }
             $('#users-names tbody').append(namerow);
