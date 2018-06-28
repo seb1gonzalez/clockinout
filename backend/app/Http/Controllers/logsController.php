@@ -31,7 +31,7 @@ class logsController extends Controller
     
     public function usersLogs()
     {
-        $usersin = DB::table('employees')->select('id', 'name')->orderBy('name', 'asc')->get();
+        $usersin = DB::table('employees')->select('id', 'name', 'phone_number')->orderBy('name', 'asc')->get();
         $usersin =  json_decode(json_encode($usersin), True);
         $response = [];
 
