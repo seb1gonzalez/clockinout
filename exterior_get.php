@@ -16,7 +16,7 @@ function fetchAll($r){
     return $temp;
 }
 
-$query = "select * from exterior_logs join employees where exterior_logs.id = pin";
+$query = "select * from exterior_logs join employees where exterior_logs.id = pin order by date desc";
 $result = mysqli_query($conn, $query);
 $result = fetchAll($result);
 
