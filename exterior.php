@@ -30,6 +30,18 @@ $toReturn['query'] = $query;
 $result = mysqli_query($conn, $query);
 $toReturn['result'] = $result;
 
+//get most recent date = $d
+$query = "select exterior_logs.date from exterior_logs order by date desc limit 1";
+$result = mysqli_query($conn, $query);
+$result = fetchAll($result);
+var_dump($result);
+
+
+/*$query = "update exterior_logs set exterior_logs.date = date_sub(exterior_logs.date, interval 1 second) where id = $id and exterior_logs.date = $d;";
+$toReturn['query'] = $query;
+$result = mysqli_query($conn, $query);
+$toReturn['result'] = $result;*/
+
 header('Content-Type: application/json');
 echo json_encode($toReturn);
 $conn->close();
