@@ -41,6 +41,11 @@ $toReturn['query'] = $query;
 $result = mysqli_query($conn, $query);
 $toReturn['result'] = $result;
 
+$query = "select exterior_logs.date from exterior_logs order by date desc limit 1";
+$result = mysqli_query($conn, $query);
+$result = fetchAll($result);
+$d = $result[0]['date'];
+
 $query = "update logs set logs.exterior = 1 where logs.time = '$d'";
 $toReturn['query'] = $query;
 $result = mysqli_query($conn, $query);
