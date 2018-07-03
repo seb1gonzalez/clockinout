@@ -36,7 +36,7 @@ $result = mysqli_query($conn, $query);
 $result = fetchAll($result);
 $d = $result[0]['date'];
 
-$query = "update exterior_logs set exterior_logs.date = date_sub(exterior_logs.date, interval 1 second) where id = $id and exterior_logs.date = '$d';";
+$query = "update exterior_logs set exterior_logs.date = date_sub(exterior_logs.date, interval 1 second) where id = $id and exterior_logs.date = '$d'";
 $toReturn['query'] = $query;
 $result = mysqli_query($conn, $query);
 $toReturn['result'] = $result;
