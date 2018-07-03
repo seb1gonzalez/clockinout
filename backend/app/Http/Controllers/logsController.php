@@ -66,7 +66,7 @@ class logsController extends Controller
             ->update(['inorout' => 0]);
             // create log
             DB::table('logs')->insert(      
-                ['eId' => $employee->id, 'inorout' => 0, 'name' => $employee->name, 'flag' => 0]
+                ['eId' => $employee->id, 'inorout' => 0, 'name' => $employee->name, 'flag' => 0, 'exterior' => 0]
             );
 
             $response = "0," . $employee->name;
