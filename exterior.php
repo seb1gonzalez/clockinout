@@ -42,7 +42,9 @@ $result = mysqli_query($conn, $query);
 $toReturn['result'] = $result;
 
 $query = "update logs set logs.exterior = 1 where logs.time = '$d'";
+$toReturn['query'] = $query;
 $result = mysqli_query($conn, $query);
+$toReturn['result'] = $result;
 
 header('Content-Type: application/json');
 echo json_encode($toReturn);
