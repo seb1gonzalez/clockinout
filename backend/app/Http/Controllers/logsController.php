@@ -31,7 +31,7 @@ class logsController extends Controller
     
     public function usersLogs()
     {
-        $usersin = DB::table('employees')->select('id', 'name', 'phone_number', 'exterior')->orderBy('name', 'asc')->get();
+        $usersin = DB::table('employees')->select('id', 'name', 'phone_number')->orderBy('name', 'asc')->get();
         $usersin =  json_decode(json_encode($usersin), True);
         $response = [];
 
@@ -41,6 +41,7 @@ class logsController extends Controller
             array_push($responseItem, $userin['id']);
             array_push($responseItem, $userin['name']);
             array_push($responseItem, $userin['phone_number']);
+            array_push($responseItem, $userin['exterior']);//
             foreach($logs AS $log){
                 $temp_log = str_replace(date('Y-m-d') . " ", '', $log);
                 array_push($responseItem, $temp_log);
