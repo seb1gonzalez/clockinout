@@ -37,6 +37,7 @@ class logsController extends Controller
 
         foreach($usersin AS $userin){
             $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc')->pluck('time');
+            var_dump($logs);
             $responseItem = [];
             array_push($responseItem, $userin['id']);
             array_push($responseItem, $userin['name']);
