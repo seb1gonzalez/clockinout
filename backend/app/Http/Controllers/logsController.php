@@ -33,13 +33,14 @@ class logsController extends Controller
     {
         $usersin = DB::table('employees')->select('id', 'name', 'phone_number')->orderBy('name', 'asc')->get();
         $usersin =  json_decode(json_encode($usersin), True);
+        var_dump($usersin);
         $response = [];
 
         foreach($usersin AS $userin){
             $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc')->pluck('time');
             $logs_ext = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc')->pluck('exterior');
             $logs_ext = json_decode(json_encode($logs_ext), True);
-            var_dump($logs_ext);
+//            var_dump($logs_ext);
             $responseItem = [];
             array_push($responseItem, $userin['id']);
             array_push($responseItem, $userin['name']);
