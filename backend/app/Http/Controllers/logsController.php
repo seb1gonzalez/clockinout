@@ -48,7 +48,7 @@ class logsController extends Controller
             }
             array_push($response, $responseItem);
         }
-        return response()->json($response);        
+        //return response()->json($response);
     }
 
     public function clockinorout($pin)
