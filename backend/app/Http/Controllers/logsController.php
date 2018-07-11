@@ -38,7 +38,7 @@ class logsController extends Controller
 
         foreach($usersin AS $userin){
             $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc')->pluck('time');
-            $logs_ex = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc')->pluck('exterior');
+            $logs_ext = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc')->pluck('exterior');
 //            $logs_ext = DB::table('logs')->select('exterior', 'time')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc');
 //            $logs_ext = json_decode(json_encode($logs_ext), True);
             var_dump($logs_ext);
@@ -57,7 +57,7 @@ class logsController extends Controller
             }
             array_push($response, $responseItem);
         }
-        return response()->json($response);
+        //return response()->json($response);
     }
 
     public function clockinorout($pin)
