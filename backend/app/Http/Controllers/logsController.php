@@ -56,7 +56,9 @@ class logsController extends Controller
 //                }
             }
             foreach($logs_ext as $ext){
-                echo $ext." | ";
+                if($ext == 1){
+                    echo $userin." employee "." is exterior";
+                }
             }
             array_push($response, $responseItem);
         }
