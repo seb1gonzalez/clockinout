@@ -57,7 +57,7 @@ class logsController extends Controller
             }
             foreach($logs_ext as $ext){
                 if($ext == 1){
-                    echo $userin." employee "." is exterior";
+                    echo $userin['id']." employee "." is exterior";
                 }
             }
             array_push($response, $responseItem);
