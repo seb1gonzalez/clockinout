@@ -94,7 +94,7 @@ function timeTable(){
                 // end position of the current entry
                 odd = false;
                 if ((j + 2) >= usersin[i].length) {
-                    // Calculate hours workded today
+                    // Calculate hours worked today
                     currDate = new Date(todayYMD + ' ' + usersin[i][j]);
                     todayTotalHours += (today - currDate) / 3600000;
                     // Change odd to true
@@ -104,11 +104,11 @@ function timeTable(){
                     button = '<button class="btn btn-primary btn-block employee-log employee-in" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5); + '</span></button>';
                     employe_status_class = 'employee-in';
                 } else {
-                    // Calculate hours workded today
+                    // Calculate hours worked today
                     currDate = new Date(todayYMD + ' ' + usersin[i][j]);
                     nextDate = new Date(todayYMD + ' ' + usersin[i][j+1]);
                     todayTotalHours += (nextDate - currDate) / 3600000;
-                    console.log(usersin[i][j+2]);
+                    //console.log(usersin[i][j+2]);
                     nextDisplacement = positions[parseInt(usersin[i][j + 1].substr(0, 2)) - $timezone_offset];
                     button = '<button class="btn btn-warning btn-block employee-log employee-out" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5) + '</span> - <span class="float-right">'+ (usersin[i][j + 1]).substring(0, 5) +'</span></button>';
                     employe_status_class = 'employee-out';
@@ -132,6 +132,12 @@ function timeTable(){
                     placed = placed + nextDisplacement + 1;
                     row = row + td;
                     j++;
+                }
+                if(usersin[i][4]){
+                    console.log(usersin[i][1] + " is exterior");
+                }
+                else{
+                    console.log(usersin[i][1] + " is not exterior");
                 }
                 namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
                 if(usersin[i][2]){
