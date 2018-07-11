@@ -93,7 +93,7 @@ function timeTable(){
                 displacement = positions[parseInt(usersin[i][j].substr(0, 2)) - $timezone_offset];
                 // end position of the current entry
                 odd = false;
-                if ((j + 1) >= usersin[i].length) {
+                if ((j + 2) >= usersin[i].length) {
                     // Calculate hours workded today
                     currDate = new Date(todayYMD + ' ' + usersin[i][j]);
                     todayTotalHours += (today - currDate) / 3600000;
@@ -108,7 +108,7 @@ function timeTable(){
                     currDate = new Date(todayYMD + ' ' + usersin[i][j]);
                     nextDate = new Date(todayYMD + ' ' + usersin[i][j+1]);
                     todayTotalHours += (nextDate - currDate) / 3600000;
-                    console.log(usersin[i][j+1]);
+                    console.log(usersin[i][j+2]);
                     nextDisplacement = positions[parseInt(usersin[i][j + 1].substr(0, 2)) - $timezone_offset];
                     button = '<button class="btn btn-warning btn-block employee-log employee-out" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5) + '</span> - <span class="float-right">'+ (usersin[i][j + 1]).substring(0, 5) +'</span></button>';
                     employe_status_class = 'employee-out';
