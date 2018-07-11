@@ -136,9 +136,7 @@ function timeTable(){
 
                 if(usersin[i][4]){
                     //console.log(usersin[i][1] + " is exterior");
-                    namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><svg class="icon">\n' +
-                        '  <use xlink:href="open-iconic.svg#account-login" class="icon-account-login"></use>\n' +
-                        '</svg>' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
+                    namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">EXTERIOR' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
                 }
                 else{
                     //console.log(usersin[i][1] + " is not exterior");
