@@ -133,13 +133,16 @@ function timeTable(){
                     row = row + td;
                     j++;
                 }
+
                 if(usersin[i][4]){
-                    console.log(usersin[i][1] + " is exterior");
+                    //console.log(usersin[i][1] + " is exterior");
+                    namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
                 }
                 else{
-                    console.log(usersin[i][1] + " is not exterior");
+                    //console.log(usersin[i][1] + " is not exterior");
+                    namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
                 }
-                namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
+
                 if(usersin[i][2]){
                     enumbers = '<tr><td><button class="btn btn-block employee-log" style="overflow: hidden;">'+usersin[i][2]+'</button></td></tr>';
                 }
