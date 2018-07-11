@@ -57,12 +57,13 @@ class logsController extends Controller
             }
             foreach($logs_ext as $ext){
                 if($ext == 1){
-                    echo $userin['id']." employee "." is exterior";
+                    //echo $userin['id']." employee "." is exterior";
+                    array_push($responseItem, $ext);
                 }
             }
             array_push($response, $responseItem);
         }
-        //return response()->json($response);
+        return response()->json($response);
     }
 
     public function clockinorout($pin)
