@@ -90,6 +90,7 @@ function timeTable(){
                 td = '';
                 employe_status_class = '';
                 // start position of the current entry
+                console.log(usersin[i][j]);
                 displacement = positions[parseInt(usersin[i][j].substr(0, 2)) - $timezone_offset];
                 // end position of the current entry
                 odd = false;
