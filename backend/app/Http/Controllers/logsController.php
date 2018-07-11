@@ -33,31 +33,21 @@ class logsController extends Controller
     {
         $usersin = DB::table('employees')->select('id', 'name', 'phone_number')->orderBy('name', 'asc')->get();
         $usersin =  json_decode(json_encode($usersin), True);
-//        var_dump($usersin);
         $response = [];
 
         foreach($usersin AS $userin){
             $logs = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc')->pluck('time');
             $logs_ext = DB::table('logs')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc')->pluck('exterior');
-//            $logs_ext = DB::table('logs')->select('exterior', 'time')->where('time', 'LIKE', "%".date('Y-m-d')."%")->where('eId', $userin['id'])->orderBy('time', 'asc');
-//            $logs_ext = json_decode(json_encode($logs_ext), True);
-//            var_dump($logs_ext);
             $responseItem = [];
             array_push($responseItem, $userin['id']);
             array_push($responseItem, $userin['name']);
             array_push($responseItem, $userin['phone_number']);
-//            array_push($responseItem, $logs_ext['exterior']);
             foreach($logs AS $log){
                 $temp_log = str_replace(date('Y-m-d') . " ", '', $log);
                 array_push($responseItem, $temp_log);
-//                $ext = $logs_ex;
-//                if($ext == 1){
-//                    array_push($responseItem, $ext);
-//                }
             }
             foreach($logs_ext as $ext){
                 if($ext == 1){
-                    //echo $userin['id']." employee "." is exterior";
                     array_push($responseItem, $ext);
                 }
             }
