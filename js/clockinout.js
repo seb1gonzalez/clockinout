@@ -86,7 +86,7 @@ function timeTable(){
             todayTotalHours = 0;
             today = new Date();
             todayYMD = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            for (var j = 3; j < (usersin[i].length); j++) {
+            for (var j = 4; j < (usersin[i].length); j++) {
                 td = '';
                 employe_status_class = '';
                 // start position of the current entry
@@ -134,7 +134,7 @@ function timeTable(){
                     j++;
                 }
 
-                if(usersin[i][99]){
+                if(usersin[i][3]){
                     //console.log(usersin[i][1] + " is exterior");
                     namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">Exterior Log - ' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
                 }
