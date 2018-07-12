@@ -86,7 +86,7 @@ function timeTable(){
             todayTotalHours = 0;
             today = new Date();
             todayYMD = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            for (var j = 4; j < (usersin[i].length); j++) {
+            for (var j = 3; j < (usersin[i].length); j++) {
                 td = '';
                 employe_status_class = '';
                 // start position of the current entry
@@ -109,7 +109,7 @@ function timeTable(){
                     nextDate = new Date(todayYMD + ' ' + usersin[i][j+1]);
                     todayTotalHours += (nextDate - currDate) / 3600000;
                     //console.log(usersin[i][j+2]);
-                    nextDisplacement = positions[parseInt(usersin[i][j + 2].substr(0, 2)) - $timezone_offset];
+                    nextDisplacement = positions[parseInt(usersin[i][j + 1].substr(0, 2)) - $timezone_offset];
                     button = '<button class="btn btn-warning btn-block employee-log employee-out" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '"><span class="float-left">' + (usersin[i][j]).substring(0, 5) + '</span> - <span class="float-right">'+ (usersin[i][j + 1]).substring(0, 5) +'</span></button>';
                     employe_status_class = 'employee-out';
                 }
