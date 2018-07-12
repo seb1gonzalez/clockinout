@@ -134,7 +134,7 @@ function timeTable(){
                     j++;
                 }
 
-                if(usersin[i][4]){
+                if(usersin[i][99]){
                     //console.log(usersin[i][1] + " is exterior");
                     namerow = '<tr><td><button class="btn btn-primary btn-block employee-log '+ employe_status_class +'" data-toggle="modal" data-target="#modal" data-id="' + usersin[i][0] + '">Exterior Log - ' + usersin[i][1] + ': ' + (todayTotalHours + '').substring(0,3) + '</button></td></tr>';
                 }
