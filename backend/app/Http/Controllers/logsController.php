@@ -46,9 +46,11 @@ class logsController extends Controller
             foreach($logs_ext as $ext){
                 if($ext == 1){
                     array_push($responseItem, $ext);
+                    break;
                 }
                 else{
                     array_push($responseItem, $ext);
+                    break;
                 }
             }
 
